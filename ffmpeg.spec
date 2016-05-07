@@ -4,16 +4,20 @@
 #global date    20110612
 #global rel     rc1
 
+
+
 %if 0%{?rhel}
 %global _without_frei0r   1
-%global _without_opencv   1
 %global _without_vpx      1
+%bcond_without opencv
+%else
+%bcond_with opencv
 %endif
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.0.1
-Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        2%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -56,7 +60,9 @@ BuildRequires:  libXvMC-devel
 %{?_with_amr:BuildRequires: opencore-amr-devel vo-amrwbenc-devel}
 %{!?_without_openal:BuildRequires: openal-soft-devel}
 %{!?_without_opencl:BuildRequires: opencl-headers ocl-icd-devel}
-%{!?_without_opencv:BuildRequires: opencv-devel}
+%if %{with opencv}
+BuildRequires: pkgconfig(opencv)
+%endif
 BuildRequires:  openjpeg-devel
 BuildRequires:  opus-devel
 %{!?_without_pulse:BuildRequires: pulseaudio-libs-devel}
@@ -142,7 +148,6 @@ This package contains development files for %{name}
     --enable-libmp3lame \\\
     %{!?_without_openal:--enable-openal} \\\
     %{!?_without_opencl:--enable-opencl} \\\
-    %{!?_without_opencv:--enable-libopencv} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
     %{!?_without_pulse:--enable-libpulse} \\\
@@ -180,6 +185,9 @@ echo "git-snapshot-%{?branch}%{date}-RPMFusion" > VERSION
 
 %build
 %{ff_configure}\
+%if %{with opencv}
+    --enable-libopencv \
+%endif
     --shlibdir=%{_libdir} \
 %if 0%{?ffmpegsuffix:1}
     --build-suffix=%{ffmpegsuffix} \
@@ -259,6 +267,9 @@ install -pm755 tools/qt-faststart $RPM_BUILD_ROOT%{_bindir}
 
 
 %changelog
+
+* Fri May 06 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.0.1-2
+- Conditional build for opencv
 
 * Tue Mar 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.0.1-1
 - Updated to 3.0.1
