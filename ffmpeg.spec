@@ -16,8 +16,8 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.0.1
-Release:        2%{?date}%{?date:git}%{?rel}%{?dist}
+Version:        3.1
+Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -267,6 +267,12 @@ install -pm755 tools/qt-faststart $RPM_BUILD_ROOT%{_bindir}
 
 
 %changelog
+
+* Wed Jun 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1-1
+- Updated to 3.1
+
+* Sat Jun 25 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.0.2-1
+- Update to 3.0.2
 
 * Fri May 06 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.0.1-2
 - Conditional build for opencv
