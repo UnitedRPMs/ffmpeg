@@ -268,8 +268,11 @@ install -pm755 tools/qt-faststart $RPM_BUILD_ROOT%{_bindir}
 
 %changelog
 
-* Wed Jun 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1-1
+* Fri Jul 15 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.1-1
 - Updated to 3.1.1
+
+* Wed Jun 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1-1
+- Updated to 3.1
 
 * Sat Jun 25 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.0.2-1
 - Update to 3.0.2
