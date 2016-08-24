@@ -2,8 +2,8 @@
  
 Summary:        Digital VCR and streaming server
  
-Version:        3.1.1
+Version:        3.1.2
  
 License:        GPLv3+
-License:        GPLv2+
+
  
