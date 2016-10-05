@@ -16,7 +16,7 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.1.2
+Version:        3.1.4
 Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
@@ -267,6 +267,9 @@ install -pm755 tools/qt-faststart $RPM_BUILD_ROOT%{_bindir}
 
 
 %changelog
+
+* Tue Oct 4 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.4-1
+- Updated to 3.1.4
 
 * Wed Aug 24 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.2-1
 - Updated to 3.1.2
