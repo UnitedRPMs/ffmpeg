@@ -4,7 +4,11 @@
 #global date    20110612
 #global rel     rc1
 
-
+%if 0%{?fedora} >= 25
+# OpenCV 3.X has an overlinking issue - unsuitable for core libraries
+# Reported as https://github.com/opencv/opencv/issues/7001
+%global _without_opencv   1
+%endif
 
 %if 0%{?rhel}
 %global _without_frei0r   1
@@ -16,7 +20,7 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.1.4
+Version:        3.2
 Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
@@ -31,57 +35,82 @@ Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 %endif
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
-%{?_with_celt:BuildRequires: celt-devel}
-%{?_with_dirac:BuildRequires: dirac-devel}
 %{?_with_faac:BuildRequires: faac-devel}
+%{?_with_fdk_aac:BuildRequires: fdk-aac-devel}
+%{?_with_flite:BuildRequires: flite-devel}
+BuildRequires:  fontconfig-devel
 BuildRequires:  freetype-devel
 %{!?_without_frei0r:BuildRequires: frei0r-devel}
+%{?_with_gme:BuildRequires: game-music-emu-devel}
 BuildRequires:  gnutls-devel
 BuildRequires:  gsm-devel
+%{?_with_ilbc:BuildRequires: ilbc-devel}
 BuildRequires:  lame-devel >= 3.98.3
-%{?_with_jack:BuildRequires: jack-audio-connection-kit-devel}
+%{!?_without_jack:BuildRequires: jack-audio-connection-kit-devel}
 %{!?_without_ladspa:BuildRequires: ladspa-devel}
 BuildRequires:  libass-devel
+BuildRequires:  libbluray-devel
+%{?_with_bs2b:BuildRequires: libbs2b-devel}
+%{?_with_caca:BuildRequires: libcaca-devel}
 %{!?_without_cdio:BuildRequires: libcdio-paranoia-devel}
+%{?_with_chromaprint:BuildRequires: libchromaprint-devel}
 #libcrystalhd is currently broken
 %{?_with_crystalhd:BuildRequires: libcrystalhd-devel}
+%if 0%{?_with_ieee1394}
+BuildRequires:  libavc1394-devel
 BuildRequires:  libdc1394-devel
+BuildRequires:  libiec61883-devel
+%endif
+BuildRequires:  libgcrypt-devel
+BuildRequires:  libGL-devel
 Buildrequires:  libmodplug-devel
 %{?_with_rtmp:BuildRequires: librtmp-devel}
+%{?_with_smb:BuildRequires: libsmbclient-devel}
+%{?_with_ssh:BuildRequires: libssh-devel}
 BuildRequires:  libtheora-devel
 BuildRequires:  libv4l-devel
 BuildRequires:  libvdpau-devel
 BuildRequires:  libvorbis-devel
 %{?!_without_vpx:BuildRequires: libvpx-devel >= 0.9.1}
 %ifarch %{ix86} x86_64
+%{!?_without_mfx:BuildRequires: libmfx-devel}
 BuildRequires:  libXvMC-devel
 %{?!_without_vaapi:BuildRequires: libva-devel >= 0.31.0}
+BuildRequires:  yasm
 %endif
+%{?_with_webp:BuildRequires: libwebp-devel}
+%{?_with_netcdf:BuildRequires: netcdf-devel}
+%{!?_without_nvenc:BuildRequires: nvenc-devel}
 %{?_with_amr:BuildRequires: opencore-amr-devel vo-amrwbenc-devel}
 %{!?_without_openal:BuildRequires: openal-soft-devel}
-%{!?_without_opencl:BuildRequires: opencl-headers ocl-icd-devel}
-%if %{with opencv}
-BuildRequires: pkgconfig(opencv)
+%if 0%{!?_without_opencl:1}
+BuildRequires:  opencl-headers ocl-icd-devel
+Recommends:     opencl-icd
 %endif
-BuildRequires:  openjpeg-devel
+%{!?_without_opencv:BuildRequires: opencv-devel}
+BuildRequires:  openjpeg2-devel
 BuildRequires:  opus-devel
 %{!?_without_pulse:BuildRequires: pulseaudio-libs-devel}
 BuildRequires:  perl(Pod::Man)
+%{?_with_rubberband:BuildRequires: rubberband-devel}
 BuildRequires:  schroedinger-devel
-BuildRequires:  SDL-devel
+BuildRequires:  SDL2-devel
+%{?_with_snappy:BuildRequires: snappy-devel}
 BuildRequires:  soxr-devel
 BuildRequires:  speex-devel
 BuildRequires:  subversion
+%{?_with_tesseract:BuildRequires: tesseract-devel}
 #BuildRequires:  texi2html
 BuildRequires:  texinfo
+%{?_with_twolame:BuildRequires: twolame-devel}
+%{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 0.0.0-0.31}
 %{!?_without_x265:BuildRequires: x265-devel}
-BuildRequires:  xvidcore-devel
+%{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
-%ifarch %{ix86} x86_64
-BuildRequires:  yasm
-%endif
-BuildRequires:	git
+%{?_with_zmq:BuildRequires: zeromq-devel}
+%{?_with_zvbi:BuildRequires: zvbi-devel}
+
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -125,43 +154,68 @@ This package contains development files for %{name}
     --prefix=%{_prefix} \\\
     --bindir=%{_bindir} \\\
     --datadir=%{_datadir}/%{name} \\\
+    --docdir=%{_docdir}/%{name} \\\
     --incdir=%{_includedir}/%{name} \\\
     --libdir=%{_libdir} \\\
     --mandir=%{_mandir} \\\
     --arch=%{_target_cpu} \\\
-    --optflags="$RPM_OPT_FLAGS" \\\
+    --optflags="%{optflags}" \\\
+    --extra-ldflags="%{?__global_ldflags}" \\\
     %{?_with_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-version3} \\\
     --enable-bzlib \\\
+    %{?_with_chromaprint:--enable-chromaprint} \\\
     %{!?_with_crystalhd:--disable-crystalhd} \\\
+    --enable-fontconfig \\\
     %{!?_without_frei0r:--enable-frei0r} \\\
+    --enable-gcrypt \\\
+    %{?_with_gmp:--enable-gmp --enable-version3} \\\
     --enable-gnutls \\\
     %{!?_without_ladspa:--enable-ladspa} \\\
     --enable-libass \\\
+    --enable-libbluray \\\
+    %{?_with_bs2b:--enable-libbs2b} \\\
+    %{?_with_caca:--enable-libcaca} \\\
     %{!?_without_cdio:--enable-libcdio} \\\
-    %{?_with_celt:--enable-libcelt} \\\
-    --enable-libdc1394 \\\
-    %{?_with_dirac:--enable-libdirac} \\\
+    %{?_with_ieee1394:--enable-libdc1394 --enable-libiec61883} \\\
     %{?_with_faac:--enable-libfaac --enable-nonfree} \\\
-    %{!?_with_jack:--disable-indev=jack} \\\
+    %{?_with_fdk_aac:--enable-libfdk-aac --enable-nonfree} \\\
+    %{?_with_flite:--enable-libflite} \\\
+    %{!?_without_jack:--enable-indev=jack} \\\
     --enable-libfreetype \\\
+    --enable-libfribidi \\\
+    %{?_with_gme:--enable-libgme} \\\
     --enable-libgsm \\\
+    %{?_with_ilbc:--enable-libilbc} \\\
     --enable-libmp3lame \\\
+    %{?_with_netcdf:--enable-netcdf} \\\
+    %{!?_without_nvenc:--enable-nvenc --extra-cflags="-I%{_includedir}/nvenc"} \\\
     %{!?_without_openal:--enable-openal} \\\
     %{!?_without_opencl:--enable-opencl} \\\
+    %{!?_without_opencv:--enable-libopencv} \\\
+    %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
     %{!?_without_pulse:--enable-libpulse} \\\
     %{?_with_rtmp:--enable-librtmp} \\\
+    %{?_with_rubberband:--enable-librubberband} \\\
     --enable-libschroedinger \\\
+    %{?_with_smb:--enable-libsmbclient} \\\
+    %{?_with_snappy:--enable-libsnappy} \\\
     --enable-libsoxr \\\
     --enable-libspeex \\\
+    %{?_with_ssh:--enable-libssh} \\\
+    %{?_with_tesseract:--enable-libtesseract} \\\
     --enable-libtheora \\\
+    %{?_with_twolame:--enable-libtwolame} \\\
     --enable-libvorbis \\\
     --enable-libv4l2 \\\
     %{!?_without_vpx:--enable-libvpx} \\\
+    %{?_with_webp:--enable-libwebp} \\\
     %{!?_without_x264:--enable-libx264} \\\
     %{!?_without_x265:--enable-libx265} \\\
-    --enable-libxvid \\\
+    %{!?_without_xvid:--enable-libxvid} \\\
+    %{?_with_zmq:--enable-libzmq} \\\
+    %{?_with_zvbi:--enable-libzvbi} \\\
     --enable-x11grab \\\
     --enable-avfilter \\\
     --enable-avresample \\\
@@ -176,18 +230,18 @@ This package contains development files for %{name}
 
 %prep
 %if 0%{?date}
-%setup -q -n ffmpeg-%{?branch}%{date}
+%setup -q -n %{name}-%{?branch}%{date}
 echo "git-snapshot-%{?branch}%{date}-RPMFusion" > VERSION
 %else
-%setup -q -n ffmpeg-%{version}
+%setup -q
 %endif
-
+# fix -O3 -g in host_cflags
+sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
+mkdir -p _doc/examples
+cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %build
 %{ff_configure}\
-%if %{with opencv}
-    --enable-libopencv \
-%endif
     --shlibdir=%{_libdir} \
 %if 0%{?ffmpegsuffix:1}
     --build-suffix=%{ffmpegsuffix} \
@@ -196,6 +250,9 @@ echo "git-snapshot-%{?branch}%{date}-RPMFusion" > VERSION
 %else
 %ifarch %{ix86}
     --cpu=%{_target_cpu} \
+%endif
+%ifarch %{ix86} x86_64
+    %{!?_without_qsv:--enable-libmfx} \
 %endif
 %ifarch %{ix86} x86_64 ppc ppc64
     --enable-runtime-cpudetect \
@@ -221,19 +278,24 @@ echo "git-snapshot-%{?branch}%{date}-RPMFusion" > VERSION
 %endif
 %endif
 
-make %{?_smp_mflags} V=1
+%make_build V=1
 make documentation V=1
 make alltools V=1
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT V=1
+%make_install V=1
+rm -r %{buildroot}%{_datadir}/%{name}/examples
 %if 0%{!?ffmpegsuffix:1}
-install -pm755 tools/qt-faststart $RPM_BUILD_ROOT%{_bindir}
+install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %endif
 
 %post libs -p /sbin/ldconfig
 
 %postun libs -p /sbin/ldconfig
+
+%post -n libavdevice -p /sbin/ldconfig
+
+%postun -n libavdevice -p /sbin/ldconfig
 
 %if 0%{!?ffmpegsuffix:1}
 %files
@@ -247,26 +309,30 @@ install -pm755 tools/qt-faststart $RPM_BUILD_ROOT%{_bindir}
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
 %{_mandir}/man1/ffserver*.1*
-%{_datadir}/ffmpeg
-%{_docdir}/ffmpeg/
+%{_datadir}/%{name}
 %endif
 
 %files libs
 %{_libdir}/lib*.so.*
 %exclude %{_libdir}/libavdevice.so.*
-%{_mandir}/man3/lib*.*.gz
+%{_mandir}/man3/lib*.3.gz
+%exclude %{_mandir}/man3/libavdevice.3*
 
 %files -n libavdevice
 %{_libdir}/libavdevice.so.*
+%{_mandir}/man3/libavdevice.3*
 
 %files devel
 %doc MAINTAINERS doc/APIchanges doc/*.txt
-%{_includedir}/ffmpeg
+%doc _doc/examples
+%doc %{_docdir}/%{name}/*.html
+%{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
 
-
 %changelog
+* Nov 13 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.2-1
+- Update to 3.2
 
 * Tue Oct 4 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.4-1
 - Updated to 3.1.4
