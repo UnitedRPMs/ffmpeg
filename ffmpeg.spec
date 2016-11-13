@@ -331,7 +331,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
-* Nov 13 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.2-1
+* Sun Nov 13 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.2-1
 - Update to 3.2
 
 * Tue Oct 4 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.4-1
