@@ -20,8 +20,8 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.2
-Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
+Version:        3.2.4
+Release:        2%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -331,34 +331,38 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Feb 20 2017 David Vásquez <davidva AT tutanota DOT com> - 3.2.4-2
+- Updated to 3.2.4-2
+
 * Sun Nov 13 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.2-1
 - Update to 3.2
 
-* Tue Oct 4 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.4-1
+* Tue Oct 4 2016 David Vásquez <davidva AT tutanota DOT com> - 3.1.4-1
 - Updated to 3.1.4
 
-* Wed Aug 24 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.2-1
+* Wed Aug 24 2016 David Vásquez <davidva AT tutanota DOT com> - 3.1.2-1
 - Updated to 3.1.2
 
-* Fri Jul 15 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1.1-1
+* Fri Jul 15 2016 David Vásquez <davidva AT tutanota DOT com> - 3.1.1-1
 - Updated to 3.1.1
 
-* Wed Jun 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.1-1
+* Wed Jun 29 2016 David Vásquez <davidva AT tutanota DOT com> - 3.1-1
 - Updated to 3.1
 
 * Sat Jun 25 2016 Pavlo Rudyi <paulcarroty at riseup.net> - 3.0.2-1
 - Update to 3.0.2
 
-* Fri May 06 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.0.1-2
+* Fri May 06 2016 David Vásquez <davidva AT tutanota DOT com> - 3.0.1-2
 - Conditional build for opencv
 
-* Tue Mar 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 3.0.1-1
+* Tue Mar 29 2016 David Vásquez <davidva AT tutanota DOT com> - 3.0.1-1
 - Updated to 3.0.1
 
-* Mon Feb 22 2016 David Vasquez <davidjeremias82[AT]gmail [DOT] com> - 3.0-1
+* Mon Feb 22 2016 David Vasquez <davidva[AT]tutanota [DOT] com> - 3.0-1
 - Updated to 3.0
 
-* Mon Jul 13 2015 David Vasquez <davidjeremias82[AT]gmail [DOT] com> - 2.8-1
+* Mon Jul 13 2015 David Vasquez <davidva[AT]tutanota [DOT] com> - 2.8-1
 - Updated to 2.8
 
 * Mon Jul 13 2015 A anonymous friend <makerpm at anon.com> - 2.7.1-1
@@ -391,7 +395,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Mon Dec 01 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.4.4-1
 - Updated to 2.4.4
 
-* Tue Nov 04 2014 Nicolas Chauvet <kwizart@gmail.com> - 2.4.3-2
+* Tue Nov 04 2014 Nicolas Chauvet <kwizart@tutanota.com> - 2.4.3-2
 - Rebuilt for vaapi 0.36
 
 * Sun Nov 02 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.4.3-1
@@ -403,10 +407,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Fri Oct 03 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.3.4-1
 - Updated to 2.3.4
 
-* Sat Sep 27 2014 kwizart <kwizart@gmail.com> - 2.3.3-3
+* Sat Sep 27 2014 kwizart <kwizart@tutanota.com> - 2.3.3-3
 - Rebuild back to ffmpeg 2.3x
 
-* Sat Sep 13 2014 Nicolas Chauvet <kwizart@gmail.com> - 2.3.3-2
+* Sat Sep 13 2014 Nicolas Chauvet <kwizart@tutanota.com> - 2.3.3-2
 - Disable libcelt by default - rfbz#3359
 
 * Tue Sep 02 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.3.3-1
@@ -431,7 +435,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Mon May 05 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.2.2-1
 - Updated to 2.2.2
 
-* Fri Apr 18 2014 Nicolas Chauvet <kwizart@gmail.com> - 2.2.1-1
+* Fri Apr 18 2014 Nicolas Chauvet <kwizart@tutanota.com> - 2.2.1-1
 - Update to 2.2.1
 
 * Mon Mar 24 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.2-1
@@ -443,7 +447,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Tue Mar 18 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.4-3
 - Rebuilt for x264
 
-* Thu Mar 06 2014 Nicolas Chauvet <kwizart@gmail.com> - 2.1.4-2
+* Thu Mar 06 2014 Nicolas Chauvet <kwizart@tutanota.com> - 2.1.4-2
 - Rebuilt for x264
 
 * Tue Feb 25 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.4-1
@@ -452,25 +456,25 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Thu Jan 16 2014 Julian Sikorski <belegdol@fedoraproject.org> - 2.1.3-1
 - Updated to 2.1.3
 
-* Wed Nov 20 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.1.1-1
+* Wed Nov 20 2013 Nicolas Chauvet <kwizart@tutanota.com> - 2.1.1-1
 - Update to 2.1.1
 
 * Tue Oct 29 2013 Julian Sikorski <belegdol@fedoraproject.org> - 2.1-1
 - Updated to 2.1
 
-* Tue Oct 22 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.2-2
+* Tue Oct 22 2013 Nicolas Chauvet <kwizart@tutanota.com> - 2.0.2-2
 - Rebuilt for x264
 
 * Wed Oct 09 2013 Julian Sikorski <belegdol@fedoraproject.org> - 2.0.2-1
 - Updated to 2.0.2
 
-* Mon Sep 30 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.1-3
+* Mon Sep 30 2013 Nicolas Chauvet <kwizart@tutanota.com> - 2.0.1-3
 - Rebuilt
 
-* Tue Aug 27 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.1-2
+* Tue Aug 27 2013 Nicolas Chauvet <kwizart@tutanota.com> - 2.0.1-2
 - Enable avresample as noticed by Xavier Bachelot
 
-* Tue Aug 13 2013 Nicolas Chauvet <kwizart@gmail.com> - 2.0.1-1
+* Tue Aug 13 2013 Nicolas Chauvet <kwizart@tutanota.com> - 2.0.1-1
 - Update to 2.0.1
 
 * Thu Aug 01 2013 Julian Sikorski <belegdol@fedoraproject.org> - 2.0-1
@@ -480,7 +484,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Thu Aug 01 2013 Julian Sikorski <belegdol@fedoraproject.org> - 1.2.2-1
 - Updated to 1.2.2
 
-* Sat Jul 20 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.2.1-7
+* Sat Jul 20 2013 Nicolas Chauvet <kwizart@tutanota.com> - 1.2.1-7
 - Rebuilt for x264
 
 * Tue Jul 02 2013 Dominik Mierzejewski <rpm at greysector.net> - 1.2.1-6
@@ -489,10 +493,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Mon Jul 01 2013 Dominik Mierzejewski <rpm at greysector.net> - 1.2.1-5
 - build with soxr support enabled (rfbz#2853)
 
-* Thu Jun 27 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.2.1-4
+* Thu Jun 27 2013 Nicolas Chauvet <kwizart@tutanota.com> - 1.2.1-4
 - Reverse the logic for neon on arm
 
-* Wed Jun 19 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.2.1-3
+* Wed Jun 19 2013 Nicolas Chauvet <kwizart@tutanota.com> - 1.2.1-3
 - Enable neon on armv7hnl
 - Enable thumb on all arm but armv6hl
 
@@ -508,10 +512,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Mon Mar 18 2013 Julian Sikorski <belegdol@fedoraproject.org> - 1.1.4-1
 - Updated to 1.1.4
 
-* Sun Mar 10 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.1.3-1
+* Sun Mar 10 2013 Nicolas Chauvet <kwizart@tutanota.com> - 1.1.3-1
 - Update to 1.1.3
 
-* Sun Jan 20 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.1.1-1
+* Sun Jan 20 2013 Nicolas Chauvet <kwizart@tutanota.com> - 1.1.1-1
 - Update to 1.1.1
 - Disable libcdio with fedora 19
 
@@ -533,7 +537,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 - Use Fedora %%{optflags}
 - Made the build process verbose
 
-* Thu Nov 01 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.0-2
+* Thu Nov 01 2012 Nicolas Chauvet <kwizart@tutanota.com> - 1.0-2
 - Add opus
 - Enable opencv frei0r by default
 - Disable librmtp - use builtin implementation rfbz#2399
@@ -543,10 +547,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 - Dropped obsolete Group, Buildroot, %%clean and %%defattr
 - Dropped the included patch
 
-* Wed Sep 05 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.11.1-3
+* Wed Sep 05 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.11.1-3
 - Rebuilt for x264 ABI 125
 
-* Sat Jul 21 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.11.1-2
+* Sat Jul 21 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.11.1-2
 - Backport fix rfbz#2423
 
 * Thu Jun 14 2012 Julian Sikorski <belegdol@fedoraproject.org> - 0.11.1-1
@@ -558,12 +562,12 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Mon May 07 2012 Julian Sikorski <belegdol@fedoraproject.org> - 0.10.3-1
 - Updated to 0.10.3
 
-* Tue May 01 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.10.2-3
+* Tue May 01 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.10.2-3
 - Sync with ffmpeg-compat and EL
 - Add BR libmodplug-devel
 - Enable libass openal-soft
 
-* Tue Apr 10 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.10.2-2
+* Tue Apr 10 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.10.2-2
 - Explicitely disable neon unless armv7hnl
 
 * Sun Mar 18 2012 Julian Sikorski <belegdol@fedoraproject.org> - 0.10.2-1
@@ -572,7 +576,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Mon Mar 12 2012 root - 0.10-2
 - Rebuilt for x264 ABI 0.120
 
-* Sun Feb 19 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.10-1
+* Sun Feb 19 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.10-1
 - Update to 0.10
 - Disable dirac by default - rfbz#1946
 - Enabled by default: libv4l2 gnutls
@@ -580,18 +584,18 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
   --with crystalhd dirac jack frei0r openal opencv
   --without celt cdio pulse
 
-* Wed Feb 01 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.8.9-1
+* Wed Feb 01 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.8.9-1
 - Update to 0.8.9
 - Add BR libass-devel
 - Rebuilt for libvpx
 
-* Mon Jan 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.8.8-1
+* Mon Jan 09 2012 Nicolas Chauvet <kwizart@tutanota.com> - 0.8.8-1
 - Update to 0.8.8
 
-* Wed Dec 21 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.8.7-1
+* Wed Dec 21 2011 Nicolas Chauvet <kwizart@tutanota.com> - 0.8.7-1
 - Update to 0.8.7
 
-* Fri Oct 28 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.8.5-2
+* Fri Oct 28 2011 Nicolas Chauvet <kwizart@tutanota.com> - 0.8.5-2
 - Fix for glibc bug rhbz#747377
 
 * Sun Oct 23 2011 Dominik Mierzejewski <rpm at greysector.net> - 0.8.5-1
@@ -607,16 +611,16 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 - support AMR WB encoding via libvo-amrwbenc (optional)
 - enable FreeType support
 
-* Thu Jul 14 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7.1-1
+* Thu Jul 14 2011 Nicolas Chauvet <kwizart@tutanota.com> - 0.7.1-1
 - Update to 0.7.1
 
-* Fri Jul 01 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7-0.3.20110612git
+* Fri Jul 01 2011 Nicolas Chauvet <kwizart@tutanota.com> - 0.7-0.3.20110612git
 - Add XvMC in ffmpeg
 
-* Sun Jun 12 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7-0.2.20110612git
+* Sun Jun 12 2011 Nicolas Chauvet <kwizart@tutanota.com> - 0.7-0.2.20110612git
 - Update to 20110612git from oldabi branch
 
-* Sun Jun 12 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.7-0.1.rc1
+* Sun Jun 12 2011 Nicolas Chauvet <kwizart@tutanota.com> - 0.7-0.1.rc1
 - Update to 7.0-rc1
 - Remove upstreamed patch
 - Fix flv - rfbz#1743
@@ -641,11 +645,11 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Fri Jan 21 2011 Hans de Goede <j.w.r.degoede@hhs.nl> - 0.6-5.20100704svn
 - Rebuild for new openjpeg
 
-* Wed Jul 21 2010 Nicolas Chauvet <kwizart@gmail.com> - 0.6-4.20100704svn
+* Wed Jul 21 2010 Nicolas Chauvet <kwizart@tutanota.com> - 0.6-4.20100704svn
 - Enable libva
 - Restore compatibility --with amr
 
-* Mon Jul 05 2010 Nicolas Chauvet <kwizart@gmail.com> - 0.6-3.20100704svn
+* Mon Jul 05 2010 Nicolas Chauvet <kwizart@tutanota.com> - 0.6-3.20100704svn
 - Fix build using --define ffmpegsuffix 'foo'
 - Disable FFmpeg binaries when built with suffix.
 
@@ -689,7 +693,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 - dropped separate SIMDified libs for x86 and ppc(64),
   runtime CPU detection should be enough
 
-* Thu Oct 15 2009 kwizart <kwizart at gmail.com > - 0.5-3.svn20091007
+* Thu Oct 15 2009 kwizart <kwizart at tutanota.com > - 0.5-3.svn20091007
 - Update to svn snapshot 20091007
 - Add BR dirac vdpau.
 - Use --with nonfree as a separate conditional for amr and faac.

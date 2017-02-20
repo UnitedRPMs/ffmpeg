@@ -1,0 +1,6 @@
+BUILD/*
+BUILDROOT/*
+RPMS/*
+SPECS/*
+SRPMS/*
+ffmpeg-*.tar.bz2
