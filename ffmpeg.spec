@@ -73,9 +73,9 @@ BuildRequires:  libvdpau-devel
 BuildRequires:  libvorbis-devel
 %{?!_without_vpx:BuildRequires: libvpx-devel >= 0.9.1}
 %ifarch %{ix86} x86_64
-%{!?_without_mfx:BuildRequires: libmfx-devel}
+BuildRequires:  libmfx-devel
 BuildRequires:  libXvMC-devel
-%{?!_without_vaapi:BuildRequires: libva-devel >= 0.31.0}
+BuildRequires:  libva-devel >= 0.31.0
 BuildRequires:  yasm
 %endif
 %{?_with_webp:BuildRequires: libwebp-devel}
