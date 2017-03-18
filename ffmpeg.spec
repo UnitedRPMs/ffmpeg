@@ -329,6 +329,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 %changelog
 
+* Sat Mar 18 2017 David Vásquez <davidva AT tutanota DOT com> - 3.2.4-3
+- Rebuilt thanks to libbluray (sarcasm)
+
 * Mon Feb 20 2017 David Vásquez <davidva AT tutanota DOT com> - 3.2.4-2
 - Updated to 3.2.4-2
 
