@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.2.4
-Release:        3%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        4%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -329,7 +329,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 %changelog
 
-* Sat Mar 18 2017 David Vásquez <davidva AT tutanota DOT com> - 3.2.4-3
+* Sat Mar 18 2017 David Vásquez <davidva AT tutanota DOT com> - 3.2.4-4
 - Rebuilt thanks to libbluray (sarcasm)
 
 * Mon Feb 20 2017 David Vásquez <davidva AT tutanota DOT com> - 3.2.4-2
