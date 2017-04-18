@@ -10,4 +10,4 @@ script:
     && ./mock-travis
 
 notifications:
-slack: unitedrpms:lzDykHTpajKrgmGz9NkrO1Hj
+#slack: unitedrpms:lzDykHTpajKrgmGz9NkrO1Hj
