@@ -4,7 +4,7 @@
  
 Summary:        Digital VCR and streaming server.
  
-Version:        3.2.4
+Version:        3.3
  
 License:        GPLv3+
 
