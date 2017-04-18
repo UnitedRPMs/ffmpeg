@@ -110,6 +110,7 @@ BuildRequires:  texinfo
 BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
 %{?_with_zvbi:BuildRequires: zvbi-devel}
+BuildRequires:  libxcb-devel libxcb
 
 
 %description
@@ -141,6 +142,7 @@ Summary:        Development package for %{name}
 Requires:       %{name}-libs%{_isa} = %{version}-%{release}
 Requires:       libavdevice%{_isa} = %{version}-%{release}
 Requires:       pkgconfig
+Requires:       libxcb
 
 %description    devel
 FFmpeg is a complete and free Internet live audio and video
@@ -216,7 +218,6 @@ This package contains development files for %{name}
     %{!?_without_xvid:--enable-libxvid} \\\
     %{?_with_zmq:--enable-libzmq} \\\
     %{?_with_zvbi:--enable-libzvbi} \\\
-    --enable-x11grab \\\
     --enable-avfilter \\\
     --enable-avresample \\\
     --enable-postproc \\\
@@ -226,6 +227,10 @@ This package contains development files for %{name}
     --enable-gpl \\\
     --disable-debug \\\
     --disable-stripping
+
+#--enable-x11grab \\\
+# was deleted as legacy
+# https://www.ffmpeg.org/ffmpeg-devices.html#x11grab
 
 
 %prep
