@@ -15,5 +15,4 @@ script:
 #- travis_wait 40 docker run --cap-add=SYS_ADMIN davidva/unibuild /bin/sh /urpms -g UnitedRPMs/spotify -s spotify.spec -t fedora-25-x86_64
 - "docker run -v $(pwd):/root/enjoy --cap-add=SYS_ADMIN davidva/unibuild /bin/sh /urpms -g UnitedRPMs/ffmpeg -s ffmpeg.spec -r true -d 'dist .fc25' -u true"
 notifications:
-  email: davidva@tutanota.com
-##  slack: unitedrpms:lzDykHTpajKrgmGz9NkrO1Hj
+slack: unitedrpms:lzDykHTpajKrgmGz9NkrO1Hj
