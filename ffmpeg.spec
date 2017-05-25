@@ -280,12 +280,12 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %endif
 %endif
 
-%make_build V=1
-make documentation V=1
-make alltools V=1
+%make_build V=0
+make documentation V=0
+make alltools V=0
 
 %install
-%make_install V=1
+%make_install V=0
 rm -r %{buildroot}%{_datadir}/%{name}/examples
 %if 0%{!?ffmpegsuffix:1}
 install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
