@@ -89,6 +89,7 @@ Recommends:     opencl-icd
 %endif
 %{!?_without_opencv:BuildRequires: opencv-devel}
 BuildRequires:  openjpeg2-devel
+BuildRequires:  openjpeg-devel
 BuildRequires:  opus-devel
 %{!?_without_pulse:BuildRequires: pulseaudio-libs-devel}
 BuildRequires:  perl(Pod::Man)
