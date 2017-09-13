@@ -20,8 +20,8 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.3.3
-Release:        3%{?date}%{?date:git}%{?rel}%{?dist}
+Version:        3.3.4
+Release:        2%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -112,7 +112,6 @@ BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
 %{?_with_zvbi:BuildRequires: zvbi-devel}
 BuildRequires:  libxcb-devel libxcb
-
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -247,6 +246,7 @@ mkdir -p _doc/examples
 cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %build
+
 %{ff_configure}\
     --shlibdir=%{_libdir} \
 %if 0%{?ffmpegsuffix:1}
@@ -334,6 +334,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Sep 13 2017 David Va <davidva AT tutanota DOT com> 3.3.4-2  
+- Updated to 3.3.4-2 
 
 * Fri Jul 28 2017 David Va <davidva AT tutanota DOT com> 3.3.3-3  
 - Updated to 3.3.3-3 
