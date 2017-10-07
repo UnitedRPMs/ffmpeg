@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.3.4
-Release:        3%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        4%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -334,6 +334,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Oct 05 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.4-4  
+- Automatic Mass Rebuild
 
 * Sat Sep 30 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.4-3  
 - Automatic Mass Rebuild
