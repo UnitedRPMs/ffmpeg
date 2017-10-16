@@ -20,8 +20,8 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.3.4
-Release:        4%{?date}%{?date:git}%{?rel}%{?dist}
+Version:        3.4
+Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -94,7 +94,6 @@ BuildRequires:  opus-devel
 %{!?_without_pulse:BuildRequires: pulseaudio-libs-devel}
 BuildRequires:  perl(Pod::Man)
 %{?_with_rubberband:BuildRequires: rubberband-devel}
-BuildRequires:  schroedinger-devel
 BuildRequires:  SDL2-devel
 %{?_with_snappy:BuildRequires: snappy-devel}
 BuildRequires:  soxr-devel
@@ -200,7 +199,6 @@ This package contains development files for %{name}
     %{!?_without_pulse:--enable-libpulse} \\\
     %{?_with_rtmp:--enable-librtmp} \\\
     %{?_with_rubberband:--enable-librubberband} \\\
-    --enable-libschroedinger \\\
     %{?_with_smb:--enable-libsmbclient} \\\
     %{?_with_snappy:--enable-libsnappy} \\\
     --enable-libsoxr \\\
@@ -334,6 +332,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Oct 16 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4-1  
+- Updated to 3.4
 
 * Thu Oct 05 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.3.4-4  
 - Automatic Mass Rebuild
