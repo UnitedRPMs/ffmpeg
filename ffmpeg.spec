@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4
-Release:        1%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        7%{?date}%{?date:git}%{?rel}%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -111,6 +111,12 @@ BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
 %{?_with_zvbi:BuildRequires: zvbi-devel}
 BuildRequires:  libxcb-devel libxcb
+# New support
+BuildRequires:	libdrm-devel
+BuildRequires:	openh264-devel
+BuildRequires:	kvazaar-devel
+BuildRequires:	libmysofa-devel
+BuildRequires:	shine-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -164,6 +170,7 @@ This package contains development files for %{name}
     --extra-ldflags="%{?__global_ldflags}" \\\
     %{?_with_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-version3} \\\
     --enable-bzlib \\\
+    --enable-libdrm \\\
     %{?_with_chromaprint:--enable-chromaprint} \\\
     %{!?_with_crystalhd:--disable-crystalhd} \\\
     --enable-fontconfig \\\
@@ -188,11 +195,15 @@ This package contains development files for %{name}
     --enable-libgsm \\\
     %{?_with_ilbc:--enable-libilbc} \\\
     --enable-libmp3lame \\\
+    --enable-libkvazaar \\\
     %{?_with_netcdf:--enable-netcdf} \\\
     %{!?_without_nvenc:--enable-nvenc --extra-cflags="-I%{_includedir}/nvenc"} \\\
     %{!?_without_openal:--enable-openal} \\\
     %{!?_without_opencl:--enable-opencl} \\\
     %{!?_without_opencv:--enable-libopencv} \\\
+    --enable-libopenh264 \\\
+    --enable-libmysofa \\\
+    --enable-libshine \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -273,8 +284,16 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %else
     --enable-thumb \
 %endif
+%ifarch armv7hl armv7hnl
+    --cpu=armv7-a \
+    --enable-vfpv3 \
+    --enable-thumb \
+%endif
 %ifarch armv7hnl
     --enable-neon \
+%endif
+%ifarch armv7hl
+    --disable-neon \
 %endif
 %endif
 %endif
@@ -332,6 +351,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Oct 25 2017 David Va <davidva AT tutanota DOT com> 3.4-7 
+- Added support for libdrm, openh264, kvazaar, libmysofa and shine
 
 * Mon Oct 16 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4-1  
 - Updated to 3.4
