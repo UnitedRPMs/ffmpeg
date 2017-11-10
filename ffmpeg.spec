@@ -1,9 +1,3 @@
-# TODO: add make test to %%check section
-
-#global branch  oldabi-
-#global date    20110612
-#global rel     rc1
-
 %if 0%{?fedora} >= 25
 # OpenCV 3.X has an overlinking issue - unsuitable for core libraries
 # Reported as https://github.com/opencv/opencv/issues/7001
@@ -21,18 +15,16 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4
-Release:        7%{?date}%{?date:git}%{?rel}%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
 License:        GPLv2+
 %endif
 URL:            http://ffmpeg.org/
-%if 0%{?date}
-Source0:        ffmpeg-%{?branch}%{date}.tar.bz2
-%else
 Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
-%endif
+# Pad the temporary buffer by the slice size
+Patch:		a94cb36ab2ad99d3a1331c9f91831ef593d94f74.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -243,12 +235,8 @@ This package contains development files for %{name}
 
 
 %prep
-%if 0%{?date}
-%setup -q -n %{name}-%{?branch}%{date}
-echo "git-snapshot-%{?branch}%{date}-RPMFusion" > VERSION
-%else
-%setup -q
-%endif
+%autosetup -p 1
+
 # fix -O3 -g in host_cflags
 sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 mkdir -p _doc/examples
@@ -351,6 +339,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Nov 10 2017 David Va <davidva AT tutanota DOT com> 3.4-8
+- Patch vc2enc_dwt: pad the temporary buffer by the slice size
 
 * Wed Oct 25 2017 David Va <davidva AT tutanota DOT com> 3.4-7 
 - Added support for libdrm, openh264, kvazaar, libmysofa and shine
