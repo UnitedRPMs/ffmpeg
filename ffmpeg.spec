@@ -25,6 +25,8 @@ URL:            http://ffmpeg.org/
 Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 # Pad the temporary buffer by the slice size
 Patch:		a94cb36ab2ad99d3a1331c9f91831ef593d94f74.patch
+# forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
+Patch1:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -342,6 +344,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 * Fri Nov 10 2017 David Va <davidva AT tutanota DOT com> 3.4-8
 - Patch vc2enc_dwt: pad the temporary buffer by the slice size
+- Patch forces the buffers to be flushed after a drain has completed
 
 * Wed Oct 25 2017 David Va <davidva AT tutanota DOT com> 3.4-7 
 - Added support for libdrm, openh264, kvazaar, libmysofa and shine
