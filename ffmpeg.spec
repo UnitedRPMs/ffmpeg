@@ -15,7 +15,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -341,6 +341,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Nov 16 2017 David Va <davidva AT tutanota DOT com> 3.4-9
+- Rebuilt
 
 * Fri Nov 10 2017 David Va <davidva AT tutanota DOT com> 3.4-8
 - Patch vc2enc_dwt: pad the temporary buffer by the slice size
