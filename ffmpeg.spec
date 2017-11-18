@@ -15,7 +15,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -111,6 +111,7 @@ BuildRequires:	openh264-devel
 BuildRequires:	kvazaar-devel
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
+BuildRequires:	vid.stab-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -198,6 +199,7 @@ This package contains development files for %{name}
     --enable-libopenh264 \\\
     --enable-libmysofa \\\
     --enable-libshine \\\
+    --enable-libvidstab \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -341,6 +343,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Nov 17 2017 David Va <davidva AT tutanota DOT com> 3.4-10
+- Enabled vid.stab
 
 * Thu Nov 16 2017 David Va <davidva AT tutanota DOT com> 3.4-9
 - Rebuilt
