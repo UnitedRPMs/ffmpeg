@@ -15,7 +15,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4
-Release:        10%{?dist}
+Release:        11%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -25,8 +25,8 @@ URL:            http://ffmpeg.org/
 Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 # Pad the temporary buffer by the slice size
 Patch:		a94cb36ab2ad99d3a1331c9f91831ef593d94f74.patch
-# forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
-Patch1:		buffer_flush.patch
+# Backport of http://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=a606f27f4c610708fa96e35eed7b7537d3d8f712 thanks to Nicolas George
+Patch1:		fs56089.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -343,6 +343,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Nov 21 2017 David Va <davidva AT tutanota DOT com> 3.4-11
+- Patch for compatibility
 
 * Fri Nov 17 2017 David Va <davidva AT tutanota DOT com> 3.4-10
 - Enabled vid.stab
