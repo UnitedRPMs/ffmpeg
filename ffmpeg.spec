@@ -15,7 +15,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4
-Release:        11%{?dist}
+Release:        12%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -27,6 +27,8 @@ Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
 Patch:		a94cb36ab2ad99d3a1331c9f91831ef593d94f74.patch
 # Backport of http://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=a606f27f4c610708fa96e35eed7b7537d3d8f712 thanks to Nicolas George
 Patch1:		fs56089.patch
+# forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
+Patch2:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -343,6 +345,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Nov 23 2017 David Va <davidva AT tutanota DOT com> 3.4-12
+- Forces the buffers to be flushed after a drain has completed
 
 * Tue Nov 21 2017 David Va <davidva AT tutanota DOT com> 3.4-11
 - Patch for compatibility
