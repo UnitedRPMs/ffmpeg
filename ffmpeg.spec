@@ -14,8 +14,8 @@
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.4
-Release:        12%{?dist}
+Version:        3.4.1
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -23,8 +23,6 @@ License:        GPLv2+
 %endif
 URL:            http://ffmpeg.org/
 Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
-# Pad the temporary buffer by the slice size
-Patch:		a94cb36ab2ad99d3a1331c9f91831ef593d94f74.patch
 # Backport of http://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=a606f27f4c610708fa96e35eed7b7537d3d8f712 thanks to Nicolas George
 Patch1:		fs56089.patch
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
@@ -345,6 +343,12 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Dec 11 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-7  
+- Updated to 3.4.1
+
+* Wed Dec 06 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4-13  
+- Automatic Mass Rebuild
 
 * Thu Nov 23 2017 David Va <davidva AT tutanota DOT com> 3.4-12
 - Forces the buffers to be flushed after a drain has completed
