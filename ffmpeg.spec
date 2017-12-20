@@ -15,7 +15,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -112,6 +112,7 @@ BuildRequires:	kvazaar-devel >= 1.2.0
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel
+BuildRequires:	vmaf-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -200,6 +201,7 @@ This package contains development files for %{name}
     --enable-libmysofa \\\
     --enable-libshine \\\
     --enable-libvidstab \\\
+    --enable-libvmaf \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -343,6 +345,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Dec 19 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-8  
+- Enabled vmaf
 
 * Mon Dec 11 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-7  
 - Updated to 3.4.1
