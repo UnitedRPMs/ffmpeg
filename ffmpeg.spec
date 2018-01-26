@@ -15,7 +15,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4.1
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -345,6 +345,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Jan 26 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-10  
+- Rebuilt for libcdio 2.0
 
 * Tue Jan 16 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-9  
 - Rebuilt for libva 2.0
