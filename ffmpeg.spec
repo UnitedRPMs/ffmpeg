@@ -12,6 +12,8 @@
 %bcond_with opencv
 %endif
 
+%global debug_package %{nil}
+
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4.1
