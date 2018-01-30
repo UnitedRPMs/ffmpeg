@@ -12,19 +12,24 @@
 %bcond_with opencv
 %endif
 
+# Globals for git repository
+%global commit0 93c8720b914e7027d0e6401e6f64a9a4ce531d0c
+%global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
+%global gver .git%{shortcommit0}
+
 %global debug_package %{nil}
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4.1
-Release:        10%{?dist}
+Release:        11%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
 License:        GPLv2+
 %endif
 URL:            http://ffmpeg.org/
-Source0:        http://ffmpeg.org/releases/ffmpeg-%{version}.tar.bz2
+Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # Backport of http://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=a606f27f4c610708fa96e35eed7b7537d3d8f712 thanks to Nicolas George
 Patch1:		fs56089.patch
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
@@ -243,7 +248,7 @@ This package contains development files for %{name}
 
 
 %prep
-%autosetup -p 1
+%autosetup -n %{name}-%{shortcommit0} -p1
 
 # fix -O3 -g in host_cflags
 sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
@@ -347,6 +352,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Jan 29 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-11  
+- Updated to current commit in stable version
 
 * Fri Jan 26 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-10  
 - Rebuilt for libcdio 2.0
