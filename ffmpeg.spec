@@ -13,16 +13,15 @@
 %endif
 
 # Globals for git repository
-%global commit0 93c8720b914e7027d0e6401e6f64a9a4ce531d0c
+%global commit0 9b97afe7ad065fc840609c5302e594538026befc
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
-%global debug_package %{nil}
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.4.1
-Release:        11%{?dist}
+Version:        3.4.2
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -105,7 +104,7 @@ BuildRequires:  subversion
 BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
-%{!?_without_x264:BuildRequires: x264-devel >= 0.0.0-0.31}
+%{!?_without_x264:BuildRequires: x264-devel >= 0.155}
 %{!?_without_x265:BuildRequires: x265-devel}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -352,6 +351,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Jan 30 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.2-7  
+- Updated to 3.4.2
 
 * Mon Jan 29 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.1-11  
 - Updated to current commit in stable version
