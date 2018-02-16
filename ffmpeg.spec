@@ -13,7 +13,7 @@
 %endif
 
 # Globals for git repository
-%global commit0 9b97afe7ad065fc840609c5302e594538026befc
+%global commit0 6a97ba521558ce131fe839eed2d51ff745280e1d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4.2
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -351,6 +351,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Feb 16 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.2-8  
+- Updated to stable release
 
 * Tue Jan 30 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.2-7  
 - Updated to 3.4.2
