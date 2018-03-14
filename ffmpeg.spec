@@ -13,7 +13,7 @@
 %endif
 
 # Globals for git repository
-%global commit0 6a97ba521558ce131fe839eed2d51ff745280e1d
+%global commit0 c289f4b6c9390d5b2b6388b0d82d40af62ea7ce2
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        3.4.2
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -119,6 +119,7 @@ BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel
 BuildRequires:	vmaf-devel
+BuildRequires:	alsa-lib-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -351,6 +352,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Mar 14 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.2-10  
+- Enabled missed alsa
+- Updated to current commit in stable version
 
 * Sat Feb 24 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.2-9  
 - Automatic Mass Rebuild
