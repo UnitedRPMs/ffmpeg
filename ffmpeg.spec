@@ -13,15 +13,15 @@
 %endif
 
 # Globals for git repository
-%global commit0 c289f4b6c9390d5b2b6388b0d82d40af62ea7ce2
+%global commit0 7b8daa771cbdafa6775e476c65afa659cc1afaac
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        3.4.2
-Release:        10%{?dist}
+Version:        4.0
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -29,8 +29,6 @@ License:        GPLv2+
 %endif
 URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
-# Backport of http://git.videolan.org/?p=ffmpeg.git;a=commitdiff;h=a606f27f4c610708fa96e35eed7b7537d3d8f712 thanks to Nicolas George
-Patch1:		fs56089.patch
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 Patch2:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
@@ -80,7 +78,7 @@ BuildRequires:  yasm
 %endif
 %{?_with_webp:BuildRequires: libwebp-devel}
 %{?_with_netcdf:BuildRequires: netcdf-devel}
-%{!?_without_nvenc:BuildRequires: nvenc-devel}
+%{!?_without_nvenc:BuildRequires: nvenc-devel nv-codec-headers}
 %{?_with_amr:BuildRequires: opencore-amr-devel vo-amrwbenc-devel}
 %{!?_without_openal:BuildRequires: openal-soft-devel}
 %if 0%{!?_without_opencl:1}
@@ -208,7 +206,7 @@ This package contains development files for %{name}
     --enable-libmysofa \\\
     --enable-libshine \\\
     --enable-libvidstab \\\
-    --enable-libvmaf \\\
+    --enable-libvmaf --enable-version3 \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -320,16 +318,14 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 %if 0%{!?ffmpegsuffix:1}
 %files
-%doc COPYING.* CREDITS README.md doc/ffserver.conf
+%doc COPYING.* CREDITS README.md 
 %{_bindir}/ffmpeg
 %{_bindir}/ffplay
 %{_bindir}/ffprobe
-%{_bindir}/ffserver
 %{_bindir}/qt-faststart
 %{_mandir}/man1/ffmpeg*.1*
 %{_mandir}/man1/ffplay*.1*
 %{_mandir}/man1/ffprobe*.1*
-%{_mandir}/man1/ffserver*.1*
 %{_datadir}/%{name}
 %endif
 
@@ -352,6 +348,11 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Apr 20 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0-7  
+- Updated to 4.0
+- ffserver was removed 
+- Deprecate avfilter_link_get_channels(). Use av_buffersink_get_channels().
 
 * Wed Mar 14 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 3.4.2-10  
 - Enabled missed alsa
