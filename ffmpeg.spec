@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.0
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -349,7 +349,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 %changelog
 
-* Sun May 27 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0-8  
+* Sun May 27 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0-9  
 - Automatic Mass Rebuild
 
 * Fri Apr 20 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0-7  
