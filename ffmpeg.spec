@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.0.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -117,6 +117,7 @@ BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel
 BuildRequires:	vmaf-devel
+BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 
 %description
@@ -205,6 +206,7 @@ This package contains development files for %{name}
     --enable-libopenh264 \\\
     --enable-libmysofa \\\
     --enable-libshine \\\
+    --enable-libzvbi \\\
     --enable-libvidstab \\\
     --enable-libvmaf --enable-version3 \\\
     %{!?_without_opengl:--enable-opengl} \\\
@@ -348,6 +350,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Jul 05 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.1-8  
+- Enabled libzvbi
 
 * Sat Jun 16 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.1-7  
 - Updated to 4.0.1
