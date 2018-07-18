@@ -13,15 +13,15 @@
 %endif
 
 # Globals for git repository
-%global commit0 e049f7c24fc6aa5fc925f860e2ad940a75cfd84f
+%global commit0 0a155c57bd8eb92ccaf7f5857dc6ab276d235846
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.0.1
-Release:        8%{?dist}
+Version:        4.0.2
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -350,6 +350,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Jul 18 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-7  
+- Updated to 4.0.2-7
 
 * Thu Jul 05 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.1-8  
 - Enabled libzvbi
