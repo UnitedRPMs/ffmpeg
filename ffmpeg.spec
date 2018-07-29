@@ -61,7 +61,7 @@ BuildRequires:  libiec61883-devel
 %endif
 BuildRequires:  libgcrypt-devel
 BuildRequires:  libGL-devel
-Buildrequires:  libmodplug-devel
+BuildRequires:  libmodplug-devel
 %{?_with_rtmp:BuildRequires: librtmp-devel}
 %{?_with_smb:BuildRequires: libsmbclient-devel}
 %{?_with_ssh:BuildRequires: libssh-devel}
