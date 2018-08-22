@@ -13,7 +13,7 @@
 %endif
 
 # Globals for git repository
-%global commit0 0a155c57bd8eb92ccaf7f5857dc6ab276d235846
+%global commit0 49a90d5d31433fc999d26f6c5d83f3d4560befee
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.0.2
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -31,6 +31,8 @@ URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 Patch2:		buffer_flush.patch
+# vmaf fix
+Patch3:		vmaf-1.3.9-fix.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
