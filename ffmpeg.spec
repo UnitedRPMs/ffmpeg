@@ -121,6 +121,7 @@ BuildRequires:	vid.stab-devel
 BuildRequires:	vmaf-devel
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:  aom-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -211,6 +212,7 @@ This package contains development files for %{name}
     --enable-libzvbi \\\
     --enable-libvidstab \\\
     --enable-libvmaf --enable-version3 \\\
+    --enable-libaom \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -352,6 +354,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Sep 13 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-8  
+- Enabled aom support
 
 * Wed Jul 18 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-7  
 - Updated to 4.0.2-7
