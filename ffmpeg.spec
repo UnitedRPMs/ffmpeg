@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.0.2
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -355,7 +355,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 %changelog
 
-* Thu Sep 13 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-8  
+* Thu Sep 13 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-9  
 - Enabled aom support
 
 * Wed Jul 18 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-7  
