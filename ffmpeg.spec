@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.0.2
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -117,7 +117,7 @@ BuildRequires:	openh264-devel
 BuildRequires:	kvazaar-devel >= 1.2.0
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
-BuildRequires:	vid.stab-devel
+BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	vmaf-devel
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
@@ -354,6 +354,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Sep 28 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-10  
+- Rebuilt for vid.stab
 
 * Thu Sep 13 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-9  
 - Enabled aom support
