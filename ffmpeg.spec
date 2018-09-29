@@ -33,6 +33,8 @@ Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{
 Patch2:		buffer_flush.patch
 # vmaf fix
 Patch3:		vmaf-1.3.9-fix.patch
+# AOM fix
+Patch4:		b69ea742ab23ad74b2ae2772764743642212a139.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
