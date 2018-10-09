@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.0.2
-Release:        11%{?dist}
+Release:        12%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -106,7 +106,7 @@ BuildRequires:  subversion
 BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
-%{!?_without_x264:BuildRequires: x264-devel >= 0.152}
+%{!?_without_x264:BuildRequires: x264-devel >= 0.155}
 %{!?_without_x265:BuildRequires: x265-devel >= 2.8}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -356,6 +356,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Oct 08 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-12  
+- Automatic Mass Rebuild
 
 * Fri Oct 05 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.2-11  
 - Automatic Mass Rebuild
