@@ -123,11 +123,7 @@ BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	vmaf-devel
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
-%if 0%{?fedora} <= 27
-BuildRequires:  aom-devel
-%else
 BuildRequires:  libaom-devel 
-%endif
 
 %description
 FFmpeg is a complete and free Internet live audio and video
