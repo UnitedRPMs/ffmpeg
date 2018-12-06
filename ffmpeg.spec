@@ -13,14 +13,14 @@
 %endif
 
 # Globals for git repository
-%global commit0 fcbd117df3077bad495e99e20f01cf93737bce76
+%global commit0 e695b0beba4aab5c1197d1bc96eef1f42635c423
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.0.3
+Version:        4.1
 Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
@@ -30,11 +30,7 @@ License:        GPLv2+
 URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
-Patch2:		buffer_flush.patch
-# vmaf fix
-Patch3:		vmaf-1.3.9-fix.patch
-# AOM fix
-Patch4:		b69ea742ab23ad74b2ae2772764743642212a139.patch
+#Patch0:		buffer_flush.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -124,6 +120,7 @@ BuildRequires:	vmaf-devel
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
+BuildRequires:	dav1d-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -246,7 +243,8 @@ This package contains development files for %{name}
     --enable-shared \\\
     --enable-gpl \\\
     --disable-debug \\\
-    --disable-stripping
+    --enable-libdav1d \\\
+    --disable-stripping 
 
 #--enable-x11grab \\\
 # was deleted as legacy
@@ -356,6 +354,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Dec 06 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1-7  
+- Updated to 4.1-7
+- Enabled support for dav1d
 
 * Sat Nov 03 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.0.3-7  
 - Updated to 4.0.3-7
