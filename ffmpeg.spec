@@ -261,6 +261,8 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %build
 
+export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
+
 %{ff_configure}\
     --shlibdir=%{_libdir} \
 %if 0%{?ffmpegsuffix:1}
