@@ -201,7 +201,7 @@ This package contains development files for %{name}
     --enable-libmp3lame \\\
     --enable-libkvazaar \\\
     %{?_with_netcdf:--enable-netcdf} \\\
-    %{!?_without_nvenc:--enable-nvenc --extra-cflags="-I%{_includedir}/nvenc"} \\\
+    %{!?_without_nvenc:--enable-nvenc --extra-cflags="-I%{_includedir}/nvenc"}:%{_includedir}/ffnvcodec/ \\\
     %{!?_without_openal:--enable-openal} \\\
     %{!?_without_opencl:--enable-opencl} \\\
     %{!?_without_opencv:--enable-libopencv} \\\
