@@ -21,7 +21,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -120,7 +120,7 @@ BuildRequires:	vmaf-devel
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
-BuildRequires:	dav1d-devel
+BuildRequires:	dav1d-devel >= 0.1.0
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -356,6 +356,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Dec 12 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1-8  
+- Rebuilt for dav1d
 
 * Thu Dec 06 2018 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1-7  
 - Updated to 4.1-7
