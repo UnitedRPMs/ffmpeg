@@ -116,7 +116,7 @@ BuildRequires:	kvazaar-devel >= 1.2.0
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
-BuildRequires:	vmaf-devel
+BuildRequires:	vmaf-devel >= 1.3.13
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
