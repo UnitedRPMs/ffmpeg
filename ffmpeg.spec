@@ -120,7 +120,7 @@ BuildRequires:	vmaf-devel >= 1.3.13
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
-BuildRequires:	dav1d-devel >= 0.1.0
+BuildRequires:	libdav1d-devel >= 0.1.0
 
 %description
 FFmpeg is a complete and free Internet live audio and video
