@@ -1,3 +1,5 @@
+%global _with_fdk_aac     1
+
 %if 0%{?fedora} >= 25
 # OpenCV 3.X has an overlinking issue - unsuitable for core libraries
 # Reported as https://github.com/opencv/opencv/issues/7001
