@@ -1,6 +1,6 @@
 #           ffmpeg
 
-[![Build Status](https://travis-ci.org/UnitedRPMs/ffmpeg.svg?branch=master)](https://travis-ci.org/UnitedRPMs/ffmpeg)
+[![CircleCI](https://circleci.com/gh/UnitedRPMS/ffmpeg.svg?style=svg)](https://circleci.com/gh/UnitedRPMS/ffmpeg)
  
 Summary:        Digital VCR and streaming server.
  
