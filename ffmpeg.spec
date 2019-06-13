@@ -1,5 +1,3 @@
-%global _with_fdk_aac     1
-
 %if 0%{?fedora} >= 25
 # OpenCV 3.X has an overlinking issue - unsuitable for core libraries
 # Reported as https://github.com/opencv/opencv/issues/7001
@@ -14,6 +12,14 @@
 %bcond_with opencv
 %endif
 
+%bcond_without davs2
+%bcond_without xavs2
+
+%bcond_with libfdk-aac
+# We need to test it
+#Please read here https://bugzilla.redhat.com/show_bug.cgi?id=1501522
+
+
 # Globals for git repository
 %global commit0 4154f8967820ca734a77ce91bb590cd77649dee8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
@@ -23,7 +29,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.1.3
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -36,7 +42,6 @@ Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
-%{?_with_fdk_aac:BuildRequires: fdk-aac-devel}
 %{?_with_flite:BuildRequires: flite-devel}
 BuildRequires:  fontconfig-devel
 BuildRequires:  freetype-devel
@@ -123,6 +128,16 @@ BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
 BuildRequires:	libdav1d-devel >= 0.1.0
+%if %{without davs2}
+BuildRequires: davs2-devel >= 1.5.115
+%endif
+%if %{without xavs2}
+BuildRequires: xavs2-devel >= 1.2.77
+%endif
+%if %{without libfdk-aac}
+BuildRequires: fdk-aac-free-devel
+%endif
+
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -192,7 +207,6 @@ This package contains development files for %{name}
     %{!?_without_cdio:--enable-libcdio} \\\
     %{?_with_ieee1394:--enable-libdc1394 --enable-libiec61883} \\\
     %{?_with_faac:--enable-libfaac --enable-nonfree} \\\
-    %{?_with_fdk_aac:--enable-libfdk-aac --enable-nonfree} \\\
     %{?_with_flite:--enable-libflite} \\\
     %{!?_without_jack:--enable-indev=jack} \\\
     --enable-libfreetype \\\
@@ -306,6 +320,15 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %endif
 %endif
 %endif
+%if %{without davs2}
+--enable-libdavs2 \
+%endif
+%if %{without xavs2}
+--enable-libxavs2 \
+%endif
+%if %{without libfdk-aac}
+--enable-libfdk-aac --enable-nonfree \
+%endif
 
 %make_build V=0
 make documentation V=0
@@ -358,6 +381,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Jun 12 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-8
+- Enabled fdk-aac-free 
 
 * Sat Apr 06 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-7
 - Updated to 4.1.3-7   
