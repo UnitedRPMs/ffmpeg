@@ -29,7 +29,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.1.3
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -147,6 +147,7 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 
 %package        libs
 Summary:        Libraries for %{name}
+Recommends:	fdk-aac-free
 
 %description    libs
 FFmpeg is a complete and free Internet live audio and video
@@ -381,6 +382,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Jun 25 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-10
+- Added fdk-aac-free as recommends
 
 * Sat Jun 22 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-9
 - Rebuilt for x265 
