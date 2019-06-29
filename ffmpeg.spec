@@ -29,7 +29,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.1.3
-Release:        10%{?dist}
+Release:        12%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -135,7 +135,7 @@ BuildRequires: davs2-devel >= 1.5.115
 BuildRequires: xavs2-devel >= 1.2.77
 %endif
 %if %{without libfdk-aac}
-BuildRequires: fdk-aac-free-devel
+BuildRequires: fdk-aac-free-devel >= 2.0.0
 %endif
 
 
@@ -382,6 +382,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Jun 25 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-12
+- Rebuilt for fdk-aac-free
 
 * Tue Jun 25 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-10
 - Added fdk-aac-free as recommends
