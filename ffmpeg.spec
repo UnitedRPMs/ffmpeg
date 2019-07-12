@@ -110,7 +110,7 @@ BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 0.157}
-%{!?_without_x265:BuildRequires: x265-devel >= 3.1}
+%{!?_without_x265:BuildRequires: x265-devel >= 3.1.1}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
@@ -123,7 +123,7 @@ BuildRequires:	kvazaar-devel >= 1.3.0
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
-BuildRequires:	vmaf-devel >= 1.3.13
+BuildRequires:	vmaf-devel >= 1.3.14
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
