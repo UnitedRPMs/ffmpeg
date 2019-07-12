@@ -21,15 +21,15 @@
 
 
 # Globals for git repository
-%global commit0 4154f8967820ca734a77ce91bb590cd77649dee8
+%global commit0 9d06c1f95ebe4f9c2cc05d041dbfd3de52d2518a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.1.3
-Release:        13%{?dist}
+Version:        4.1.4
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -127,7 +127,7 @@ BuildRequires:	vmaf-devel >= 1.3.13
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
-BuildRequires:	libdav1d-devel >= 0.1.0
+BuildRequires:	libdav1d-devel >= 0.1.0 
 %if %{without davs2}
 BuildRequires: davs2-devel >= 1.5.115
 %endif
@@ -382,6 +382,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Jul 11 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.4-7
+- Updated to 4.1.4-7
 
 * Fri Jul 05 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.3-13
 - Rebuilt for openh264
