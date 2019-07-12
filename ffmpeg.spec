@@ -119,7 +119,7 @@ BuildRequires:  libxcb-devel libxcb
 # New support
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.0.0
-BuildRequires:	kvazaar-devel >= 1.2.0
+BuildRequires:	kvazaar-devel >= 1.3.0
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
