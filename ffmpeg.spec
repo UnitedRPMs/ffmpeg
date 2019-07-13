@@ -12,8 +12,12 @@
 %bcond_with opencv
 %endif
 
-%bcond_without davs2
-%bcond_without xavs2
+# Wait, will be enabled the next update
+# https://git.ffmpeg.org/gitweb/ffmpeg.git/blob/81d3d7dd44acc7ae7c57e99176d1d428fb40c353:/Changelog
+%bcond_without dav1d
+
+%bcond_with davs2
+%bcond_with xavs2
 
 %bcond_with libfdk-aac
 # We need to test it
@@ -127,7 +131,9 @@ BuildRequires:	vmaf-devel >= 1.3.14
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
-BuildRequires:	libdav1d-devel >= 0.1.0 
+%if %{without dav1d}
+BuildRequires:	libdav1d-devel >= 0.2.1
+%endif
 %if %{without davs2}
 BuildRequires: davs2-devel >= 1.5.115
 %endif
@@ -260,7 +266,6 @@ This package contains development files for %{name}
     --enable-shared \\\
     --enable-gpl \\\
     --disable-debug \\\
-    --enable-decoder=libdav1d \\\
     --disable-stripping 
 
 #--enable-x11grab \\\
@@ -329,6 +334,9 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %endif
 %if %{without libfdk-aac}
 --enable-libfdk-aac --enable-nonfree \
+%endif
+%if %{without dav1d}
+--enable-libdav1d 
 %endif
 
 %make_build V=0
