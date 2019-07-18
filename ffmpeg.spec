@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.1.4
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -235,6 +235,7 @@ This package contains development files for %{name}
     --enable-libvidstab \\\
     --enable-libvmaf --enable-version3 \\\
     --enable-libaom \\\
+    --enable-libmfx \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -390,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Jul 17 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.4-8
+- Enabled libmfx missed
 
 * Thu Jul 11 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.4-7
 - Updated to 4.1.4-7
