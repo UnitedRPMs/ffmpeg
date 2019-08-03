@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.1.4
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -114,7 +114,7 @@ BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 0.157}
-%{!?_without_x265:BuildRequires: x265-devel >= 3.1.1}
+%{!?_without_x265:BuildRequires: x265-devel >= 3.1.2}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
@@ -391,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Aug 02 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.4-9
+- Rebuilt for x265
 
 * Wed Jul 17 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.4-8
 - Enabled libmfx missed
