@@ -14,7 +14,7 @@
 
 # Wait, will be enabled the next update
 # https://git.ffmpeg.org/gitweb/ffmpeg.git/blob/81d3d7dd44acc7ae7c57e99176d1d428fb40c353:/Changelog
-%bcond_without dav1d
+%bcond_with dav1d
 
 %bcond_with davs2
 %bcond_with xavs2
@@ -25,15 +25,15 @@
 
 
 # Globals for git repository
-%global commit0 9d06c1f95ebe4f9c2cc05d041dbfd3de52d2518a
+%global commit0 75384bc464411fb2291105dca84b8bc411188350
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.1.4
-Release:        9%{?dist}
+Version:        4.2
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -132,7 +132,7 @@ BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
 %if %{without dav1d}
-BuildRequires:	libdav1d-devel >= 0.2.1
+BuildRequires:	libdav1d-devel >= 0.3.1
 %endif
 %if %{without davs2}
 BuildRequires: davs2-devel >= 1.5.115
@@ -391,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Aug 05 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2-7
+- Updated to 4.2
 
 * Fri Aug 02 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.1.4-9
 - Rebuilt for x265
