@@ -132,7 +132,7 @@ BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
 %if %{without dav1d}
-BuildRequires:	libdav1d-devel >= 0.3.1
+BuildRequires:	libdav1d-devel >= 0.4.0
 %endif
 %if %{without davs2}
 BuildRequires: davs2-devel >= 1.5.115
