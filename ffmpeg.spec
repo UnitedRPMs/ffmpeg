@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -55,7 +55,7 @@ BuildRequires:  gnutls-devel
 BuildRequires:  gsm-devel
 %{?_with_ilbc:BuildRequires: ilbc-devel}
 BuildRequires:  lame-devel >= 3.98.3
-%{!?_without_jack:BuildRequires: jack-audio-connection-kit-devel}
+BuildRequires:  jack-audio-connection-kit-devel
 %{!?_without_ladspa:BuildRequires: ladspa-devel}
 BuildRequires:  libass-devel
 BuildRequires:  libbluray-devel
@@ -215,7 +215,7 @@ This package contains development files for %{name}
     %{?_with_ieee1394:--enable-libdc1394 --enable-libiec61883} \\\
     %{?_with_faac:--enable-libfaac --enable-nonfree} \\\
     %{?_with_flite:--enable-libflite} \\\
-    %{!?_without_jack:--enable-indev=jack} \\\
+    --enable-libjack \\\
     --enable-libfreetype \\\
     --enable-libfribidi \\\
     %{?_with_gme:--enable-libgme} \\\
@@ -391,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Sat Aug 10 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2-8
+- Enabled missed libjack
 
 * Mon Aug 05 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2-7
 - Updated to 4.2
