@@ -25,15 +25,15 @@
 
 
 # Globals for git repository
-%global commit0 75384bc464411fb2291105dca84b8bc411188350
+%global commit0 1529dfb73a5157dcb8762051ec4c8d8341762478
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.2
-Release:        8%{?dist}
+Version:        4.2.1
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -127,7 +127,7 @@ BuildRequires:	kvazaar-devel >= 1.3.0
 BuildRequires:	libmysofa-devel
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
-BuildRequires:	vmaf-devel >= 1.3.14
+BuildRequires:	vmaf-devel >= 1.3.15
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
@@ -391,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Sep 11 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-7
+- Updated to 4.2.1
 
 * Sat Aug 10 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2-8
 - Enabled missed libjack

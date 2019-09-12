@@ -3,6 +3,8 @@ BUILDROOT/*
 RPMS/*
 SPECS/*
 SRPMS/*
-ffmpeg-*.tar.bz2
-ffmpeg-*.tar.gz
+*.tar.bz2
+*.tar.gz
 bfg*.jar
+*.rpm
+.directory

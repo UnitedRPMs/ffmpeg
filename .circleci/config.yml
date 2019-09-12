@@ -2,12 +2,12 @@ version: 2
 jobs:
   build:
     docker: 
-      - image: davidva/unibuild-31	
+      - image: davidva/unibuild-32	
     working_directory: ~/enjoy
     parallelism: 1
     steps:
       - checkout
-      - run: " cd / && rm -f /urpms && /usr/bin/wget -c https://raw.githubusercontent.com/kuboosoft/united-build/master/urpms && chmod a+x $PWD/urpms && ./urpms -g UnitedRPMs/ffmpeg -s ffmpeg.spec -r true -d 'dist .fc31' -u true" 
+      - run: " cd / && rm -f /urpms && /usr/bin/wget -c https://raw.githubusercontent.com/kuboosoft/united-build/master/urpms && chmod a+x $PWD/urpms && ./urpms -g UnitedRPMs/ffmpeg -s ffmpeg.spec -r true -d 'dist .fc32' -u true" 
 workflows:
   version: 2
   build_and_test:
