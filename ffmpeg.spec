@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.1
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -89,7 +89,7 @@ BuildRequires:  yasm
 %endif
 %{?_with_webp:BuildRequires: libwebp-devel}
 %{?_with_netcdf:BuildRequires: netcdf-devel}
-%{!?_without_nvenc:BuildRequires: nvenc-devel nv-codec-headers}
+%{!?_without_nvenc:BuildRequires: nvenc-devel nv-codec-headers >= 9.0.18.2}
 %{?_with_amr:BuildRequires: opencore-amr-devel vo-amrwbenc-devel}
 %{!?_without_openal:BuildRequires: openal-soft-devel}
 %if 0%{!?_without_opencl:1}
@@ -391,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Sep 27 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-9
+- Rebuilt for nv-codec-headers
 
 * Mon Sep 16 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-8
 - Rebuilt for libmysofa
