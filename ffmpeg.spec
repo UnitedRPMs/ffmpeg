@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.1
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -132,7 +132,7 @@ BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
 %if %{without dav1d}
-BuildRequires:	libdav1d-devel >= 0.4.0
+BuildRequires:	libdav1d-devel >= 0.5.0
 %endif
 %if %{without davs2}
 BuildRequires: davs2-devel >= 1.5.115
@@ -391,6 +391,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Oct 14 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-10
+- Rebuilt for dav1d
 
 * Fri Sep 27 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-9
 - Rebuilt for nv-codec-headers
