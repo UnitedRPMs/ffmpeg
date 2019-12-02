@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.1
-Release:        12%{?dist}
+Release:        13%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -118,7 +118,7 @@ BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 0.157}
-%{!?_without_x265:BuildRequires: x265-devel >= 3.1.2}
+%{!?_without_x265:BuildRequires: x265-devel >= 3.2.1}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
@@ -395,6 +395,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Sun Dec 01 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-13
+- Rebuild for x265
 
 * Thu Nov 28 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-12
 - F32 Replaced libmfx by intel-mediasdk
