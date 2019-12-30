@@ -33,7 +33,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.1
-Release:        14%{?dist}
+Release:        15%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -147,7 +147,10 @@ BuildRequires: xavs2-devel >= 1.2.77
 %if %{without libfdk-aac}
 BuildRequires: fdk-aac-free-devel >= 2.0.0
 %endif
-
+BuildRequires: cmrt-devel
+BuildRequires: libva-devel
+BuildRequires: libva-intel-hybrid-driver
+BuildRequires: libva-intel-driver
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -340,6 +343,7 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %if %{without libfdk-aac}
 --enable-libfdk-aac --enable-nonfree \
 %endif
+--enable-vaapi \
 %if %{without dav1d}
 --enable-libdav1d 
 %endif
@@ -395,6 +399,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Sun Dec 29 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-15
+- Enabled vaapi
 
 * Sun Dec 08 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-14
 - Rebuilt for dav1d
