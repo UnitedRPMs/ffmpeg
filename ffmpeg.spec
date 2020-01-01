@@ -25,15 +25,15 @@
 
 
 # Globals for git repository
-%global commit0 1529dfb73a5157dcb8762051ec4c8d8341762478
+%global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.2.1
-Release:        15%{?dist}
+Version:        4.2.2
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -399,6 +399,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Jan 01 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-7
+- Updated to 4.2.2
 
 * Sun Dec 29 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.1-15
 - Enabled vaapi
