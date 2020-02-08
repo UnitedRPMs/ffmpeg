@@ -128,7 +128,7 @@ BuildRequires:  libxcb-devel libxcb
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.0.0
 BuildRequires:	kvazaar-devel >= 1.3.0
-BuildRequires:	libmysofa-devel >= 0.9.1
+BuildRequires:	libmysofa-devel >= 1.0
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	vmaf-devel >= 1.3.15
@@ -399,6 +399,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Feb 06 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-9
+- Rebuilt for libmysofa
 
 * Thu Jan 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-8
 - Rebuilt for libmysofa
