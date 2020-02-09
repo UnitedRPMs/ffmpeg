@@ -50,7 +50,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
