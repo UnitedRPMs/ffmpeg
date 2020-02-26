@@ -50,7 +50,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -135,7 +135,7 @@ BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 0.157}
-%{!?_without_x265:BuildRequires: x265-devel >= 3.2.1}
+%{!?_without_x265:BuildRequires: x265-devel >= 3.3}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
@@ -416,6 +416,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Feb 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-10
+- Rebuilt for x265
 
 * Thu Feb 06 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-9
 - Rebuilt for libmysofa
