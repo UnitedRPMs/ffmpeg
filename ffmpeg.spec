@@ -50,7 +50,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        10%{?dist}
+Release:        11%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -148,10 +148,13 @@ BuildRequires:	kvazaar-devel >= 1.3.0
 BuildRequires:	libmysofa-devel >= 1.0
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
-BuildRequires:	vmaf-devel >= 1.3.15
+BuildRequires:	vmaf-devel >= 1.5.1
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
+BuildRequires:	vapoursynth-devel
+BuildRequires:  vulkan-loader-devel 
+BuildRequires:  glslang-devel
 %if %{without dav1d}
 BuildRequires:	libdav1d-devel >= 0.5.2
 %endif
@@ -260,6 +263,8 @@ This package contains development files for %{name}
     --enable-libvmaf --enable-version3 \\\
     --enable-libaom \\\
     --enable-libmfx \\\
+    --enable-vapoursynth \\\
+    --enable-vulkan --enable-libglslang \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -416,6 +421,11 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Mar 02 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-11
+- Enabled vapoursynth
+- Enabled vulkan
+- Rebuilt for vmaf
 
 * Mon Feb 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-10
 - Rebuilt for x265
