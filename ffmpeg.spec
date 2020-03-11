@@ -29,6 +29,7 @@
 %bcond_with opencv
 %endif
 
+
 # Wait, will be enabled the next update
 # https://git.ffmpeg.org/gitweb/ffmpeg.git/blob/81d3d7dd44acc7ae7c57e99176d1d428fb40c353:/Changelog
 %bcond_with dav1d
@@ -148,13 +149,11 @@ BuildRequires:	kvazaar-devel >= 1.3.0
 BuildRequires:	libmysofa-devel >= 1.0
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
-BuildRequires:	vmaf-devel >= 1.5.1
+BuildRequires:	libvmaf-devel >= 1.3
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
 BuildRequires:	vapoursynth-devel
-BuildRequires:  vulkan-loader-devel 
-BuildRequires:  glslang-devel
 %if %{without dav1d}
 BuildRequires:	libdav1d-devel >= 0.5.2
 %endif
@@ -260,11 +259,9 @@ This package contains development files for %{name}
     --enable-libshine \\\
     --enable-libzvbi \\\
     --enable-libvidstab \\\
-    --enable-libvmaf --enable-version3 \\\
     --enable-libaom \\\
     --enable-libmfx \\\
     --enable-vapoursynth \\\
-    --enable-vulkan --enable-libglslang \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
     --enable-libopus \\\
@@ -356,6 +353,9 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %endif
 %endif
 %endif
+%if 0%{?fedora} <= 31
+    --enable-libvmaf --enable-version3 \
+%endif
 %if %{without davs2}
 --enable-libdavs2 \
 %endif
@@ -424,8 +424,6 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 * Mon Mar 02 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-11
 - Enabled vapoursynth
-- Enabled vulkan
-- Rebuilt for vmaf
 
 * Mon Feb 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-10
 - Rebuilt for x265
@@ -433,7 +431,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 * Thu Feb 06 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-9
 - Rebuilt for libmysofa
 
-* Thu Jan 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-8
+* Fri Jan 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-8
 - Rebuilt for libmysofa
 
 * Wed Jan 01 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-7
