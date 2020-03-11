@@ -1,24 +1,13 @@
-version: 2
-jobs:
-  build:
-    docker: 
-      - image: davidva/unibuild-33	
-    working_directory: ~/enjoy
-    parallelism: 1
-    steps:
-      - checkout
-      - run: " cd / && rm -f /urpms && /usr/bin/wget -c https://raw.githubusercontent.com/kuboosoft/united-build/master/urpms && chmod a+x $PWD/urpms && ./urpms -g UnitedRPMs/ffmpeg -s ffmpeg.spec -r true -d 'dist .fc33' -u true" 
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
 workflows:
-  version: 2
-  build_and_test:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
     jobs:
-      - build
-notify:
-  webhooks:
-    # A list of hook hashes, containing the url field
-    # gitter hook
-    - url: https://webhooks.gitter.im/e/8ff0b35066468a87de71
-
-        
-
-
+      - welcome/run
