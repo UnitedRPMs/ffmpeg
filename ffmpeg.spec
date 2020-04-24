@@ -51,7 +51,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.2.2
-Release:        11%{?dist}
+Release:        12%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -145,7 +145,7 @@ BuildRequires:  libxcb-devel libxcb
 # New support
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.0.0
-BuildRequires:	kvazaar-devel >= 1.3.0
+BuildRequires:	kvazaar-devel >= 2.0.0
 BuildRequires:	libmysofa-devel >= 1.0
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
@@ -421,6 +421,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Apr 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-12
+- Rebuilt for kvazaar
 
 * Mon Mar 02 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-11
 - Enabled vapoursynth
