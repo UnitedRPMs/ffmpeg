@@ -43,15 +43,15 @@
 
 
 # Globals for git repository
-%global commit0 192d1d34eb3668fa27f433e96036340e1e5077a0
+%global commit0 d3b963cc41824a3c5b2758ac896fb23e20a87875
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.2.2
-Release:        12%{?dist}
+Version:        4.2.3
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -61,6 +61,7 @@ URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
+Patch:		vmaf-model-path.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -154,6 +155,10 @@ BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:  libaom-devel 
 BuildRequires:	vapoursynth-devel
+BuildRequires:	srt-devel
+%if 0%{?fedora} >= 33
+BuildRequires:	rav1e-devel
+%endif
 %if %{without dav1d}
 BuildRequires:	libdav1d-devel >= 0.5.2
 %endif
@@ -310,8 +315,6 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %build
 
-export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
-
 %{ff_configure}\
     --shlibdir=%{_libdir} \
 %if 0%{?ffmpegsuffix:1}
@@ -353,9 +356,6 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %endif
 %endif
 %endif
-%if 0%{?fedora} <= 31
-    --enable-libvmaf --enable-version3 \
-%endif
 %if %{without davs2}
 --enable-libdavs2 \
 %endif
@@ -367,7 +367,13 @@ export PKG_CONFIG_PATH="/usr/share/pkgconfig:%{_libdir}/pkgconfig"
 %endif
 --enable-vaapi \
 %if %{without dav1d}
---enable-libdav1d 
+--enable-libdav1d \
+%endif
+%if 0%{?fedora} >= 33
+--enable-librav1e \
+%endif
+%if 0%{?fedora} <= 32
+--enable-libvmaf --enable-version3 
 %endif
 
 %make_build V=0
@@ -421,6 +427,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu May 21 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.3-7
+- Updated to 4.2.3
 
 * Fri Apr 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.2-12
 - Rebuilt for kvazaar
