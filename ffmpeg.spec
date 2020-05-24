@@ -369,12 +369,13 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if %{without dav1d}
 --enable-libdav1d \
 %endif
-%if 0%{?fedora} >= 33
---enable-librav1e \
-%endif
 %if 0%{?fedora} <= 32
 --enable-libvmaf --enable-version3 
 %endif
+
+# not yet
+#--enable-librav1e \
+
 
 %make_build V=0
 make documentation V=0
