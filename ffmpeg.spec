@@ -43,15 +43,15 @@
 
 
 # Globals for git repository
-%global commit0 d3b963cc41824a3c5b2758ac896fb23e20a87875
+%global commit0 8e12af29d1a3f95c9e952d78354e3c8b1c0431a8
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.2.3
-Release:        9%{?dist}
+Version:        4.3
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -369,9 +369,7 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if %{without dav1d}
 --enable-libdav1d \
 %endif
-%if 0%{?fedora} <= 32
 --enable-libvmaf --enable-version3 
-%endif
 
 # not yet
 #--enable-librav1e \
@@ -428,6 +426,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Jun 23 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3-7
+- Updated to 4.3
 
 * Sat May 30 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.2.3-9
 - Rebuilt for x265
