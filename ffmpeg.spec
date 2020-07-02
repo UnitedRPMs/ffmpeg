@@ -51,7 +51,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -147,7 +147,7 @@ BuildRequires:  libxcb-devel libxcb
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.1.1
 BuildRequires:	kvazaar-devel >= 2.0.0
-BuildRequires:	libmysofa-devel >= 1.0
+BuildRequires:	libmysofa-devel >= 1.1
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	libvmaf-devel >= 1.3
@@ -426,6 +426,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Jun 24 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3-8
+- Rebuilt for libmysofa
 
 * Tue Jun 23 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3-7
 - Updated to 4.3
