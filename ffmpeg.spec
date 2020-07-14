@@ -43,15 +43,16 @@
 
 
 # Globals for git repository
-%global commit0 8e12af29d1a3f95c9e952d78354e3c8b1c0431a8
+# https://git.ffmpeg.org/gitweb/ffmpeg.git
+%global commit0 6b6b9e593dd4d3aaf75f48d40a13ef03bdef9fdb
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.3
-Release:        10%{?dist}
+Version:        4.3.1
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -153,6 +154,7 @@ BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	libvmaf-devel >= 1.3
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	libopenmpt-devel
 %if 0%{?fedora} >= 33
 BuildRequires:  libaom-devel >= 2.0.0
 %else
@@ -273,6 +275,7 @@ This package contains development files for %{name}
     --enable-vapoursynth \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
+    --enable-libopenmpt \\\
     --enable-libopus \\\
     %{!?_without_pulse:--enable-libpulse} \\\
     %{?_with_rtmp:--enable-librtmp} \\\
@@ -430,6 +433,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Jul 13 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-7
+- Enabled libopenmpt
+- Updated to 4.3.1
 
 * Wed Jul 08 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3-10
 - Rebuilt for aom
