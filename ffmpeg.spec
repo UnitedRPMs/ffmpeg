@@ -52,7 +52,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -433,6 +433,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Aug 10 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-8
+- Rebuilt
 
 * Mon Jul 13 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-7
 - Enabled libopenmpt
