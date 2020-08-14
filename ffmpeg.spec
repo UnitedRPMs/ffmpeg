@@ -15,6 +15,12 @@
 # Please submit bugfixes or comments via https://goo.gl/zqFJft
 #
 
+%undefine _debuginfo_subpackages
+%undefine _debugsource_packages
+
+%global _lto_cflags %{nil}
+
+
 %if 0%{?fedora} >= 25
 # OpenCV 3.X has an overlinking issue - unsuitable for core libraries
 # Reported as https://github.com/opencv/opencv/issues/7001
@@ -324,6 +330,7 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %{ff_configure}\
     --shlibdir=%{_libdir} \
+    --disable-lto \
 %if 0%{?ffmpegsuffix:1}
     --build-suffix=%{ffmpegsuffix} \
     --disable-doc \
