@@ -240,7 +240,6 @@ This package contains development files for %{name}
     --incdir=%{_includedir}/%{name} \\\
     --libdir=%{_libdir} \\\
     --mandir=%{_mandir} \\\
-    --arch=%{_target_cpu} \\\
     --optflags="%{optflags}" \\\
     --extra-ldflags="%{?__global_ldflags}" \\\
     %{?_with_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-version3} \\\
@@ -315,8 +314,18 @@ This package contains development files for %{name}
     --enable-shared \\\
     --enable-gpl \\\
     --disable-debug \\\
-    --disable-stripping 
-
+    --disable-stripping \\\
+    --disable-error-resilience \\\
+    --enable-pic \\\
+    --enable-rdft \\\
+    --enable-pixelutils \\\
+    --enable-sdl2 \\\
+    --enable-swscale
+    
+    
+    
+#--arch=%%{_target_cpu} \\\
+# use optimizations for current CI CPU, useless 'cause not universal    
 #--enable-x11grab \\\
 # was deleted as legacy
 # https://www.ffmpeg.org/ffmpeg-devices.html#x11grab
