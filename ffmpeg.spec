@@ -191,6 +191,9 @@ BuildRequires: cmrt-devel
 BuildRequires: libva-devel
 BuildRequires: libva-intel-hybrid-driver
 BuildRequires: libva-intel-driver
+BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers
+BuildRequires: glslang glslang-devel
+BuildRequires: lensfun-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -320,7 +323,10 @@ This package contains development files for %{name}
     --enable-rdft \\\
     --enable-pixelutils \\\
     --enable-sdl2 \\\
-    --enable-swscale
+    --enable-swscale \\\
+    --enable-vulkan --enable-libglslang \\\
+    --enable-liblensfun
+
     
     
     
