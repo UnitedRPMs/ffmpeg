@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        10%{?dist}
+Release:        12%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -160,7 +160,9 @@ BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	libvmaf-devel >= 1.3
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
+%if 0%{?fedora} >= 31
 BuildRequires:	libopenmpt-devel
+%endif
 %if 0%{?fedora} >= 33
 BuildRequires:  libaom-devel >= 2.0.0
 %else
@@ -192,7 +194,9 @@ BuildRequires: libva-devel
 BuildRequires: libva-intel-hybrid-driver
 BuildRequires: libva-intel-driver
 BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers
-BuildRequires: glslang glslang-devel
+# Incompatible
+#BuildRequires: glslang glslang-devel 
+#
 BuildRequires: lensfun-devel
 
 %description
@@ -287,7 +291,6 @@ This package contains development files for %{name}
     --enable-vapoursynth \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
-    --enable-libopenmpt \\\
     --enable-libopus \\\
     %{!?_without_pulse:--enable-libpulse} \\\
     %{?_with_rtmp:--enable-librtmp} \\\
@@ -324,8 +327,8 @@ This package contains development files for %{name}
     --enable-pixelutils \\\
     --enable-sdl2 \\\
     --enable-swscale \\\
-    --enable-vulkan --enable-libglslang \\\
-    --enable-liblensfun
+    --enable-vulkan \\\
+    --enable-liblensfun 
 
     
     
@@ -402,11 +405,15 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if %{without dav1d}
 --enable-libdav1d \
 %endif
---enable-libvmaf --enable-version3 
+--enable-libvmaf --enable-version3 \
+%if 0%{?fedora} >= 31
+--enable-libopenmpt \
+%endif
 
 # not yet
 #--enable-librav1e \
-
+# incompatible
+#--enable-libglslang \
 
 %make_build V=0
 make documentation V=0
@@ -459,6 +466,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Nov 19 2020 Pavlo Rudyi <paulcarroty at riseup.net> - 4.3.1-12
+- Enabled Vulkan 
 
 * Mon Aug 17 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-10
 - Rebuilt for dav1d
