@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        12%{?dist}
+Release:        13%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -143,7 +143,7 @@ BuildRequires:  subversion
 BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
-%{!?_without_x264:BuildRequires: x264-devel >= 0.159}
+%{!?_without_x264:BuildRequires: x264-devel >= 0.161}
 %{!?_without_x265:BuildRequires: x265-devel >= 3.4}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -466,6 +466,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Nov 23 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-13
+- Rebuilt for x264
 
 * Thu Nov 19 2020 Pavlo Rudyi <paulcarroty at riseup.net> - 4.3.1-12
 - Enabled Vulkan 
