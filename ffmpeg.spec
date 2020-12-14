@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        13%{?dist}
+Release:        14%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -143,7 +143,7 @@ BuildRequires:  subversion
 BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
-%{!?_without_x264:BuildRequires: x264-devel >= 0.161}
+%{!?_without_x264:BuildRequires: x264-devel >= 1:0.161}
 %{!?_without_x265:BuildRequires: x265-devel >= 3.4}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -151,6 +151,7 @@ BuildRequires:  zlib-devel
 %{?_with_zvbi:BuildRequires: zvbi-devel}
 BuildRequires:  libxcb-devel libxcb
 # New support
+BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.1.1
 BuildRequires:	kvazaar-devel >= 2.0.0
@@ -328,6 +329,7 @@ This package contains development files for %{name}
     --enable-sdl2 \\\
     --enable-swscale \\\
     --enable-vulkan \\\
+    --enable-lv2 \\\
     --enable-liblensfun 
 
     
@@ -466,6 +468,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Sun Dec 06 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-14
+- Enabled LV2
 
 * Mon Nov 23 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-13
 - Rebuilt for x264
