@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        14%{?dist}
+Release:        16%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -175,8 +175,8 @@ BuildRequires:	srt-devel
 BuildRequires:	rav1e-devel
 %endif
 %if %{without dav1d}
-%if 0%{?fedora} >= 32
-BuildRequires:	libdav1d-devel >= 0.7.1
+%if 0%{?fedora} >= 34
+BuildRequires:	libdav1d-devel >= 0.8.0
 %else
 BuildRequires:	libdav1d-devel >= 0.5.2
 %endif
@@ -468,6 +468,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Dec 15 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-16
+- Rebuilt for dav1d
 
 * Sun Dec 06 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-14
 - Enabled LV2
