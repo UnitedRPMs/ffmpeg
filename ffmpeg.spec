@@ -195,9 +195,7 @@ BuildRequires: libva-devel
 BuildRequires: libva-intel-hybrid-driver
 BuildRequires: libva-intel-driver
 BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers
-# Incompatible
-#BuildRequires: glslang glslang-devel 
-#
+BuildRequires: glslang glslang-devel 
 BuildRequires: lensfun-devel
 
 %description
@@ -330,7 +328,8 @@ This package contains development files for %{name}
     --enable-swscale \\\
     --enable-vulkan \\\
     --enable-lv2 \\\
-    --enable-liblensfun 
+    --enable-liblensfun \\\
+    --enable-libglslang
 
     
     
@@ -349,6 +348,16 @@ This package contains development files for %{name}
 sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 mkdir -p _doc/examples
 cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
+
+# fix glslang compatibility
+sed -i "s|#include <glslang/Include/revision.h>||" libavfilter/glslang.cpp
+sed -i "s|-lOSDependent||" configure
+sed -i "s|-lOGLCompiler||" configure
+
+# fix error in vulkan pkgconfig
+sed -i 's|vulkan64|vulkan|g' /usr/lib64/pkgconfig/vulkan.pc
+
+
 
 %build
 
