@@ -1,0 +1,12 @@
+diff --git a/libavfilter/glslang.cpp b/libavfilter/glslang.cpp
+index 497df6e245..125eb5c364 100644
+--- a/libavfilter/glslang.cpp
++++ b/libavfilter/glslang.cpp
+@@ -24,7 +24,6 @@ extern "C" {
+ }
+
+ #include <glslang/Include/ResourceLimits.h>
+-#include <glslang/Include/revision.h>
+ #include <glslang/Public/ShaderLang.h>
+ #include <glslang/SPIRV/GlslangToSpv.h>
+

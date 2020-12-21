@@ -50,7 +50,7 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 6b6b9e593dd4d3aaf75f48d40a13ef03bdef9fdb
+%global commit0 ca55240b8c1fd4cfdb61f88fd2cb378d475d910a
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        16%{?dist}
+Release:        17%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -69,6 +69,7 @@ Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
 Patch:		vmaf-model-path.patch
+Patch1:		FFmpeg-devel-libavfilter-glslang-Remove-unused-header.diff
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -194,7 +195,7 @@ BuildRequires: cmrt-devel
 BuildRequires: libva-devel
 BuildRequires: libva-intel-hybrid-driver
 BuildRequires: libva-intel-driver
-BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers
+BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers vulkan-loader-compat-devel
 BuildRequires: glslang glslang-devel 
 BuildRequires: lensfun-devel
 
@@ -349,14 +350,13 @@ sed -i "s|check_host_cflags -O3|check_host_cflags %{optflags}|" configure
 mkdir -p _doc/examples
 cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
-# fix glslang compatibility
-sed -i "s|#include <glslang/Include/revision.h>||" libavfilter/glslang.cpp
-sed -i "s|-lOSDependent||" configure
-sed -i "s|-lOGLCompiler||" configure
+# fix glslang compatibility (We need test it; but our glslang don't need it)
+# sed -i "s|#include <glslang/Include/revision.h>||" libavfilter/glslang.cpp (We have a patch)
+#sed -i "s|-lOSDependent||" configure
+#sed -i "s|-lOGLCompiler||" configure
 
-# fix error in vulkan pkgconfig
-sed -i 's|vulkan64|vulkan|g' /usr/lib64/pkgconfig/vulkan.pc
-
+# fix error in vulkan pkgconfig (We need previlegies and touch the official package; we don't need it; solved with our vulkan-loader-compat-devel)
+# sed -i 's|vulkan64|vulkan|g' /usr/lib64/pkgconfig/vulkan.pc
 
 
 %build
@@ -477,6 +477,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Sun Dec 20 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-17
+- Updated to current commit stable
+- Changes for vulkan and glslang
 
 * Tue Dec 15 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-16
 - Rebuilt for dav1d
