@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        17%{?dist}
+Release:        18%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -101,7 +101,6 @@ BuildRequires:  libgcrypt-devel
 BuildRequires:  libGL-devel
 BuildRequires:  libmodplug-devel
 %{?_with_rtmp:BuildRequires: librtmp-devel}
-%{?_with_smb:BuildRequires: libsmbclient-devel}
 %{?_with_ssh:BuildRequires: libssh-devel}
 BuildRequires:  libtheora-devel
 BuildRequires:  libv4l-devel
@@ -198,6 +197,9 @@ BuildRequires: libva-intel-driver
 BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers vulkan-loader-compat-devel
 BuildRequires: glslang glslang-devel 
 BuildRequires: lensfun-devel
+%if 0%{?fedora} >= 33
+BuildRequires: libsmbclient-devel >= 4.13.3
+%endif
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -295,7 +297,6 @@ This package contains development files for %{name}
     %{!?_without_pulse:--enable-libpulse} \\\
     %{?_with_rtmp:--enable-librtmp} \\\
     %{?_with_rubberband:--enable-librubberband} \\\
-    %{?_with_smb:--enable-libsmbclient} \\\
     %{?_with_snappy:--enable-libsnappy} \\\
     --enable-libsoxr \\\
     --enable-libspeex \\\
@@ -420,6 +421,9 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if 0%{?fedora} >= 31
 --enable-libopenmpt \
 %endif
+%if 0%{?fedora} >= 33
+    --enable-libsmbclient \
+%endif
 
 # not yet
 #--enable-librav1e \
@@ -477,6 +481,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Dec 30 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-18
+- Enable smbclient support F33-Rawhide
 
 * Sun Dec 20 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-17
 - Updated to current commit stable
