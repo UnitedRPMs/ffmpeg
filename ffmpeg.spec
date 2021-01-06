@@ -200,6 +200,7 @@ BuildRequires: lensfun-devel
 %if 0%{?fedora} >= 33
 BuildRequires: libsmbclient-devel >= 4.13.3
 %endif
+BuildRequires: libxml2-devel
 
 %description
 FFmpeg is a complete and free Internet live audio and video
@@ -331,6 +332,7 @@ This package contains development files for %{name}
     --enable-vulkan \\\
     --enable-lv2 \\\
     --enable-liblensfun \\\
+    --enable-libxml2 \\\
     --enable-libglslang
 
     
