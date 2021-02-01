@@ -1,7 +1,7 @@
 #
 # spec file for package ffmpeg
 #
-# Copyright (c) 2020 UnitedRPMs.
+# Copyright (c) 2021 UnitedRPMs.
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -58,7 +58,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.3.1
-Release:        18%{?dist}
+Release:        19%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -155,7 +155,7 @@ BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.1.1
 BuildRequires:	kvazaar-devel >= 2.0.0
-BuildRequires:	libmysofa-devel >= 1.1
+BuildRequires:	libmysofa-devel >= 1.2
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	libvmaf-devel >= 1.3
@@ -483,6 +483,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Jan 28 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-19
+- Rebuilt for libmysofa
 
 * Wed Dec 30 2020 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-18
 - Enable smbclient support F33-Rawhide
