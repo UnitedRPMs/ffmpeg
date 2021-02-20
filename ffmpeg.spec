@@ -50,15 +50,15 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 ca55240b8c1fd4cfdb61f88fd2cb378d475d910a
+%global commit0 d08bcbffffee13b4e3663598a1d8f805a095688d
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.3.1
-Release:        19%{?dist}
+Version:        4.3.2
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -483,6 +483,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Feb 15 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.2-7
+- Updated to 4.3.2
 
 * Thu Jan 28 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.1-19
 - Rebuilt for libmysofa
