@@ -45,7 +45,8 @@
 
 %bcond_with libfdk-aac
 # We need to test it
-#Please read here https://bugzilla.redhat.com/show_bug.cgi?id=1501522
+# fdk-aac-free https://bugzilla.redhat.com/show_bug.cgi?id=1501522 doesn't support 
+# variable bitrate (`-q` flag)
 
 
 # Globals for git repository
@@ -323,21 +324,21 @@ This package contains development files for %{name}
     --enable-gpl \\\
     --disable-debug \\\
     --disable-stripping \\\
-    --disable-error-resilience \\\
-    --enable-pic \\\
     --enable-rdft \\\
     --enable-pixelutils \\\
     --enable-sdl2 \\\
     --enable-swscale \\\
     --enable-vulkan \\\
     --enable-lv2 \\\
-    --enable-liblensfun \\\
     --enable-libxml2 \\\
     --enable-libglslang
 
+
     
     
-    
+# --disable-error-resilience \\\ broken in 4.4
+# --enable-liblensfun \\\ broken in 4.4
+# --enable-pic \\\ bad performance  
 #--arch=%%{_target_cpu} \\\
 # use optimizations for current CI CPU, useless 'cause not universal    
 #--enable-x11grab \\\
