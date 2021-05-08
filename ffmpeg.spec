@@ -51,14 +51,14 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 d08bcbffffee13b4e3663598a1d8f805a095688d
+%global commit0 75c39692923a203b04efe7ee46d767f0057eac3b
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.3.2
+Version:        4.4
 Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
@@ -69,8 +69,8 @@ URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
-Patch:		vmaf-model-path.patch
-Patch1:		FFmpeg-devel-libavfilter-glslang-Remove-unused-header.diff
+Patch0:		010-ffmpeg-fix-vmaf-model-path.txt
+Patch1:		015-ffmpeg-cuda11-fix.txt
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -197,7 +197,7 @@ BuildRequires: libva-intel-hybrid-driver
 BuildRequires: libva-intel-driver
 BuildRequires: vulkan-loader vulkan-loader-devel vulkan-headers vulkan-loader-compat-devel
 BuildRequires: glslang glslang-devel 
-BuildRequires: lensfun-devel
+#BuildRequires: lensfun-devel
 %if 0%{?fedora} >= 33
 BuildRequires: libsmbclient-devel >= 4.13.3
 %endif
@@ -484,6 +484,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri May 07 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-7
+- Updated to 4.4
 
 * Mon Feb 15 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.2-7
 - Updated to 4.3.2
