@@ -162,6 +162,7 @@ BuildRequires:	vid.stab-devel >= 1.1.0
 BuildRequires:	libvmaf-devel >= 1.3
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	svt-av1-devel
 %if 0%{?fedora} >= 31
 BuildRequires:	libopenmpt-devel
 %endif
@@ -331,6 +332,7 @@ This package contains development files for %{name}
     --enable-vulkan \\\
     --enable-lv2 \\\
     --enable-libxml2 \\\
+    --enable-libsvtav1 \\\
     --enable-libglslang
 
 
@@ -487,6 +489,7 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 
 * Fri May 07 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-7
 - Updated to 4.4
+- Enabled svt-av1
 
 * Mon Feb 15 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.3.2-7
 - Updated to 4.3.2
