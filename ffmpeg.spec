@@ -145,7 +145,7 @@ BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 1:0.161}
-%{!?_without_x265:BuildRequires: x265-devel >= 3.4}
+%{!?_without_x265:BuildRequires: x265-devel >= 3.5}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
 %{?_with_zmq:BuildRequires: zeromq-devel}
