@@ -159,7 +159,9 @@ BuildRequires:	kvazaar-devel >= 2.0.0
 BuildRequires:	libmysofa-devel >= 1.2
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
+%if 0%{?fedora} >= 34
 BuildRequires:	libvmaf-devel >= 1.3
+%endif
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	svt-av1-devel
@@ -422,12 +424,14 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if %{without dav1d}
 --enable-libdav1d \
 %endif
+%if 0%{?fedora} >= 34
 --enable-libvmaf --enable-version3 \
+%endif
 %if 0%{?fedora} >= 31
 --enable-libopenmpt \
 %endif
 %if 0%{?fedora} >= 33
-    --enable-libsmbclient \
+    --enable-libsmbclient --enable-version3 \
 %endif
 
 # not yet
