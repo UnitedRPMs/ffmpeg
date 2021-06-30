@@ -51,7 +51,7 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 75c39692923a203b04efe7ee46d767f0057eac3b
+%global commit0 91aa49218e9f62af5eb028848218ad61fb6c87c7
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.4
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -168,8 +168,8 @@ BuildRequires:	svt-av1-devel
 %if 0%{?fedora} >= 31
 BuildRequires:	libopenmpt-devel
 %endif
-%if 0%{?fedora} >= 33
-BuildRequires:  libaom-devel >= 2.0.0
+%if 0%{?fedora} >= 34
+BuildRequires:  libaom-devel >= 3.1.1
 %else
 BuildRequires:  libaom-devel
 %endif 
@@ -490,6 +490,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Jun 18 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-8
+- Updated to current commit stable
+- Rebuilt for aom
 
 * Fri May 07 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-7
 - Updated to 4.4
