@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.4
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -144,7 +144,7 @@ BuildRequires:  subversion
 BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
-%{!?_without_x264:BuildRequires: x264-devel >= 1:0.161}
+%{!?_without_x264:BuildRequires: x264-devel >= 1:0.163}
 %{!?_without_x265:BuildRequires: x265-devel >= 3.5}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -490,6 +490,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Mon Aug 02 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-9
+- Rebuilt for x264
 
 * Fri Jun 18 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-8
 - Updated to current commit stable
