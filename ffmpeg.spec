@@ -51,7 +51,7 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 91aa49218e9f62af5eb028848218ad61fb6c87c7
+%global commit0 404c9331dde21f0e7b1b10649b2e348e854f45bb
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.4
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -155,8 +155,8 @@ BuildRequires:  libxcb-devel libxcb
 BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.1.1
-BuildRequires:	kvazaar-devel >= 2.0.0
-BuildRequires:	libmysofa-devel >= 1.2
+BuildRequires:	kvazaar-devel >= 2.1.0
+BuildRequires:	libmysofa-devel >= 1.2.1
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
 %if 0%{?fedora} >= 34
@@ -490,6 +490,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Oct 22 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-10
+- Rebuilt for kvazaar and libmysofa
+- Updated to current commit stable
 
 * Mon Aug 02 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-9
 - Rebuilt for x264
