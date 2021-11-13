@@ -51,15 +51,15 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 404c9331dde21f0e7b1b10649b2e348e854f45bb
+%global commit0 7e0d640edf6c3eee1816b105c2f7498c4f948e74
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.4
-Release:        10%{?dist}
+Version:        4.4.1
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -132,6 +132,9 @@ BuildRequires:  openjpeg2-devel
 BuildRequires:  openjpeg-devel
 BuildRequires:  opus-devel
 %{!?_without_pulse:BuildRequires: pulseaudio-libs-devel}
+%if 0%{?fedora} >= 35
+BuildRequires:	libpulsecommon-15.0.so
+%endif
 BuildRequires:  perl(Pod::Man)
 %{?_with_rubberband:BuildRequires: rubberband-devel}
 BuildRequires:  SDL2-devel
@@ -144,7 +147,7 @@ BuildRequires:  subversion
 BuildRequires:  texinfo
 %{?_with_twolame:BuildRequires: twolame-devel}
 %{?_with_wavpack:BuildRequires: wavpack-devel}
-%{!?_without_x264:BuildRequires: x264-devel >= 1:0.163}
+%{!?_without_x264:BuildRequires: x264-devel >= 1:0.161}
 %{!?_without_x265:BuildRequires: x265-devel >= 3.5}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -155,13 +158,11 @@ BuildRequires:  libxcb-devel libxcb
 BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.1.1
-BuildRequires:	kvazaar-devel >= 2.1.0
-BuildRequires:	libmysofa-devel >= 1.2.1
+BuildRequires:	kvazaar-devel >= 2.0.0
+BuildRequires:	libmysofa-devel >= 1.2
 BuildRequires:	shine-devel
 BuildRequires:	vid.stab-devel >= 1.1.0
-%if 0%{?fedora} <= 33
-BuildRequires:	libvmaf-devel >= 1.5
-%endif
+BuildRequires:	libvmaf-devel 
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	svt-av1-devel
@@ -424,7 +425,7 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if %{without dav1d}
 --enable-libdav1d \
 %endif
-%if 0%{?fedora} <= 33
+%if 0%{?fedora} >= 34
 --enable-libvmaf --enable-version3 \
 %endif
 %if 0%{?fedora} >= 31
@@ -438,6 +439,7 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 #--enable-librav1e \
 # incompatible
 #--enable-libglslang \
+#--enable-libvmaf --enable-version3 \
 
 %make_build V=0
 make documentation V=0
@@ -490,6 +492,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Wed Nov 10 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4.1-7
+- Updated to 4.4.1
 
 * Fri Oct 22 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4-10
 - Rebuilt for kvazaar and libmysofa
