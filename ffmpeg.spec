@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        4.4.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -169,8 +169,8 @@ BuildRequires:	svt-av1-devel
 %if 0%{?fedora} >= 31
 BuildRequires:	libopenmpt-devel
 %endif
-%if 0%{?fedora} >= 34
-BuildRequires:  libaom-devel >= 3.1.1
+%if 0%{?fedora} >= 35
+BuildRequires:  libaom-devel >= 3.2.0
 %else
 BuildRequires:  libaom-devel
 %endif 
@@ -494,6 +494,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Dec 03 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4.1-8
+- Rebuilt for aom
 
 * Wed Nov 10 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4.1-7
 - Updated to 4.4.1
