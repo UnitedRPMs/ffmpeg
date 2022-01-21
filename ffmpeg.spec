@@ -1,7 +1,7 @@
 #
 # spec file for package ffmpeg
 #
-# Copyright (c) 2021 UnitedRPMs.
+# Copyright (c) 2022 UnitedRPMs.
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -51,15 +51,15 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 7e0d640edf6c3eee1816b105c2f7498c4f948e74
+%global commit0 390d6853d0ef408007feb39c0040682c81c02751
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        4.4.1
-Release:        8%{?dist}
+Version:        5.0
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -155,6 +155,7 @@ BuildRequires:  zlib-devel
 %{?_with_zvbi:BuildRequires: zvbi-devel}
 BuildRequires:  libxcb-devel libxcb
 # New support
+BuildRequires:	librockchip-devel librockchip-vpu-devel
 BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
 BuildRequires:	openh264-devel >= 2.1.1
@@ -322,7 +323,6 @@ This package contains development files for %{name}
     %{?_with_zmq:--enable-libzmq} \\\
     %{?_with_zvbi:--enable-libzvbi} \\\
     --enable-avfilter \\\
-    --enable-avresample \\\
     --enable-postproc \\\
     --enable-pthreads \\\
     --disable-static \\\
@@ -335,6 +335,7 @@ This package contains development files for %{name}
     --enable-sdl2 \\\
     --enable-swscale \\\
     --enable-vulkan \\\
+    --enable-rkmpp \\\
     --enable-lv2 \\\
     --enable-libxml2 \\\
     --enable-libsvtav1 \\\
@@ -494,6 +495,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Sat Jan 15 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-7
+- Updated to 5.0
 
 * Fri Dec 03 2021 Unitedrpms Project <unitedrpms AT protonmail DOT com> 4.4.1-8
 - Rebuilt for aom
