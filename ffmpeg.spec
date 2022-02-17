@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        5.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -71,6 +71,7 @@ Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{
 #Patch0:		buffer_flush.patch
 Patch0:		010-ffmpeg-fix-vmaf-model-path.txt
 Patch1:		015-ffmpeg-cuda11-fix.txt
+Patch2:		uavs3d_version.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -155,6 +156,7 @@ BuildRequires:  zlib-devel
 %{?_with_zvbi:BuildRequires: zvbi-devel}
 BuildRequires:  libxcb-devel libxcb
 # New support
+BuildRequires:  pkgconfig(uavs3d)
 BuildRequires:	librockchip-devel librockchip-vpu-devel
 BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
@@ -336,6 +338,7 @@ This package contains development files for %{name}
     --enable-swscale \\\
     --enable-vulkan \\\
     --enable-rkmpp \\\
+    --enable-libuavs3d \\\
     --enable-lv2 \\\
     --enable-libxml2 \\\
     --enable-libsvtav1 \\\
@@ -495,6 +498,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Thu Feb 10 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-8
+- Enabled uavs3d
 
 * Sat Jan 15 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-7
 - Updated to 5.0
