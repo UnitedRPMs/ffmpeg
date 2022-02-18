@@ -210,6 +210,9 @@ BuildRequires: libsmbclient-devel >= 4.13.3
 %endif
 BuildRequires: libxml2-devel
 
+# Congrats to Fedora with the implementation of ffmpeg-free, but various our packages need other supports.
+Provides: %{name}-free%{?_isa} = %{version}-%{release}
+
 %description
 FFmpeg is a complete and free Internet live audio and video
 broadcasting solution for Linux/Unix. It also includes a digital
@@ -218,9 +221,17 @@ and video, MPEG4, h263, ac3, asf, avi, real, mjpeg, and flash.
 
 %package        libs
 Summary:        Libraries for %{name}
-Recommends:	    fdk-aac-free
+Recommends:     fdk-aac-free
 Requires:       opus
 Requires:       libogg
+# Congrats to Fedora with the implementation of ffmpeg-free, but various our packages need other supports.
+Provides:       libavcodec-free%{?_isa} = %{version}-%{release}
+Provides:       libavfilter-free%{?_isa} = %{version}-%{release}
+Provides:       libavformat-free%{?_isa} = %{version}-%{release}
+Provides:       libavutil-free%{?_isa} = %{version}-%{release}
+Provides:       libpostproc-free%{?_isa} = %{version}-%{release}
+Provides:       libswresample-free%{?_isa} = %{version}-%{release}
+Provides:       libswscale-free%{?_isa} = %{version}-%{release}
 
 %description    libs
 FFmpeg is a complete and free Internet live audio and video
@@ -498,6 +509,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Feb 18 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-9
+- Enabled compatibility with ffmpeg-free
 
 * Thu Feb 10 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-8
 - Enabled uavs3d
