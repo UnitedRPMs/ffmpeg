@@ -51,7 +51,7 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 390d6853d0ef408007feb39c0040682c81c02751
+%global commit0 911d7f167c30f27a042b8558dfcf012b3c20e858
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        5.0
-Release:        8%{?dist}
+Release:        9%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
