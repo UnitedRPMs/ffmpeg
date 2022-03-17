@@ -59,7 +59,7 @@
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
 Version:        5.0
-Release:        9%{?dist}
+Release:        10%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -160,7 +160,7 @@ BuildRequires:  pkgconfig(uavs3d)
 BuildRequires:	librockchip-devel librockchip-vpu-devel
 BuildRequires:	lilv-devel
 BuildRequires:	libdrm-devel
-BuildRequires:	openh264-devel >= 2.1.1
+BuildRequires:	openh264-devel >= 2.2.0
 BuildRequires:	kvazaar-devel >= 2.0.0
 BuildRequires:	libmysofa-devel >= 1.2
 BuildRequires:	shine-devel
@@ -169,6 +169,7 @@ BuildRequires:	libvmaf-devel
 BuildRequires:	zvbi-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	svt-av1-devel
+BuildRequires:	AMF-devel
 %if 0%{?fedora} >= 31
 BuildRequires:	libopenmpt-devel
 %endif
@@ -509,6 +510,10 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Mar 11 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-10
+- Enabled AMF support
+- Rebuilt for openh264
 
 * Fri Feb 18 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-9
 - Enabled compatibility with ffmpeg-free
