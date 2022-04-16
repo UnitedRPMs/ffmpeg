@@ -286,8 +286,6 @@ This package contains development files for %{name}
     --arch=%{_target_cpu} \\\
     --optflags="%{optflags}" \\\
     --extra-cflags="-I%{_includedir}/rav1e" \\\
-    %{?flavor:--disable-manpages} \\\
-    %{?progs_suffix:--progs-suffix=%{progs_suffix}} \\\
     %{?build_suffix:--build-suffix=%{build_suffix}} \\\
     %{!?_without_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-version3} \\\
     --enable-bzlib \\\
