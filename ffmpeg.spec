@@ -18,7 +18,7 @@
 %undefine _debuginfo_subpackages
 %undefine _debugsource_packages
 
-%global _lto_cflags %{nil}
+#global _lto_cflags %{nil}
 
 
 %if 0%{?fedora} >= 25
@@ -51,15 +51,15 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 911d7f167c30f27a042b8558dfcf012b3c20e858
+%global commit0 9687cae2b468e09e35df4cea92cc2e6a0e6c93b3
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        5.0
-Release:        10%{?dist}
+Version:        5.0.1
+Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
 %else
@@ -70,7 +70,6 @@ Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
 Patch0:		010-ffmpeg-fix-vmaf-model-path.txt
-Patch1:		015-ffmpeg-cuda11-fix.txt
 Patch2:		uavs3d_version.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
@@ -81,17 +80,15 @@ BuildRequires:  freetype-devel
 %{!?_without_frei0r:BuildRequires: frei0r-devel}
 %{?_with_gme:BuildRequires: game-music-emu-devel}
 BuildRequires:  gnutls-devel
+BuildRequires:  annobin-plugin-gcc
 BuildRequires:  gsm-devel
-%{?_with_ilbc:BuildRequires: ilbc-devel}
 BuildRequires:  lame-devel >= 3.98.3
 BuildRequires:  jack-audio-connection-kit-devel
 %{!?_without_ladspa:BuildRequires: ladspa-devel}
 BuildRequires:  libass-devel
 BuildRequires:  libbluray-devel
-%{?_with_bs2b:BuildRequires: libbs2b-devel}
 %{?_with_caca:BuildRequires: libcaca-devel}
 %{!?_without_cdio:BuildRequires: libcdio-paranoia-devel}
-%{?_with_chromaprint:BuildRequires: libchromaprint-devel}
 #libcrystalhd is currently broken
 %{?_with_crystalhd:BuildRequires: libcrystalhd-devel}
 %if 0%{?_with_ieee1394}
@@ -102,8 +99,6 @@ BuildRequires:  libiec61883-devel
 BuildRequires:  libgcrypt-devel
 BuildRequires:  libGL-devel
 BuildRequires:  libmodplug-devel
-%{?_with_rtmp:BuildRequires: librtmp-devel}
-%{?_with_ssh:BuildRequires: libssh-devel}
 BuildRequires:  libtheora-devel
 BuildRequires:  libv4l-devel
 BuildRequires:  libvdpau-devel
@@ -119,7 +114,7 @@ BuildRequires:  libXvMC-devel
 BuildRequires:  libva-devel >= 0.31.0
 BuildRequires:  yasm
 %endif
-%{?_with_webp:BuildRequires: libwebp-devel}
+
 %{?_with_netcdf:BuildRequires: netcdf-devel}
 %{!?_without_nvenc:BuildRequires: nvenc-devel nv-codec-headers >= 9.0.18.2}
 %{?_with_amr:BuildRequires: opencore-amr-devel vo-amrwbenc-devel}
@@ -137,22 +132,17 @@ BuildRequires:  opus-devel
 BuildRequires:	libpulsecommon-15.0.so
 %endif
 BuildRequires:  perl(Pod::Man)
-%{?_with_rubberband:BuildRequires: rubberband-devel}
 BuildRequires:  SDL2-devel
-%{?_with_snappy:BuildRequires: snappy-devel}
 BuildRequires:  soxr-devel
 BuildRequires:  speex-devel
 BuildRequires:  subversion
 %{?_with_tesseract:BuildRequires: tesseract-devel}
 #BuildRequires:  texi2html
 BuildRequires:  texinfo
-%{?_with_twolame:BuildRequires: twolame-devel}
-%{?_with_wavpack:BuildRequires: wavpack-devel}
 %{!?_without_x264:BuildRequires: x264-devel >= 1:0.161}
 %{!?_without_x265:BuildRequires: x265-devel >= 3.5}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
-%{?_with_zmq:BuildRequires: zeromq-devel}
 %{?_with_zvbi:BuildRequires: zvbi-devel}
 BuildRequires:  libxcb-devel libxcb
 # New support
@@ -210,6 +200,27 @@ BuildRequires: glslang glslang-devel
 BuildRequires: libsmbclient-devel >= 4.13.3
 %endif
 BuildRequires: libxml2-devel
+
+# Missed requires
+BuildRequires: rubberband-devel
+BuildRequires: pkgconfig(rav1e)
+BuildRequires: ilbc-devel    
+BuildRequires: libbs2b-devel                        
+BuildRequires: libchromaprint-devel                 
+BuildRequires: librsvg2-devel                       
+BuildRequires: librtmp-devel                        
+BuildRequires: libssh-devel                         
+BuildRequires: libwebp-devel                        
+#BuildRequires: nasm                                 
+BuildRequires: opencore-amr-devel                                        
+BuildRequires: snappy-devel                         
+BuildRequires: tesseract-devel                      
+BuildRequires: twolame-devel                        
+BuildRequires: vo-amrwbenc-devel                    
+BuildRequires: wavpack-devel                        
+BuildRequires: zeromq-devel 
+BuildRequires: lensfun-devel
+BuildRequires: celt-devel
 
 # Congrats to Fedora with the implementation of ffmpeg-free, but various our packages need other supports.
 Provides: %{name}-free%{?_isa} = %{version}-%{release}
@@ -272,11 +283,14 @@ This package contains development files for %{name}
     --incdir=%{_includedir}/%{name} \\\
     --libdir=%{_libdir} \\\
     --mandir=%{_mandir} \\\
+    --arch=%{_target_cpu} \\\
     --optflags="%{optflags}" \\\
-    --extra-ldflags="%{?__global_ldflags}" \\\
-    %{?_with_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-version3} \\\
+    --extra-cflags="-I%{_includedir}/rav1e" \\\
+    %{?flavor:--disable-manpages} \\\
+    %{?progs_suffix:--progs-suffix=%{progs_suffix}} \\\
+    %{?build_suffix:--build-suffix=%{build_suffix}} \\\
+    %{!?_without_amr:--enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libvo-amrwbenc --enable-version3} \\\
     --enable-bzlib \\\
-    --enable-libdrm \\\
     %{?_with_chromaprint:--enable-chromaprint} \\\
     %{!?_with_crystalhd:--disable-crystalhd} \\\
     --enable-fontconfig \\\
@@ -285,78 +299,93 @@ This package contains development files for %{name}
     %{?_with_gmp:--enable-gmp --enable-version3} \\\
     --enable-gnutls \\\
     %{!?_without_ladspa:--enable-ladspa} \\\
-    --enable-libass \\\
-    --enable-libbluray \\\
+    %{!?_without_aom:--enable-libaom} \\\
+    %{!?_without_dav1d:--enable-libdav1d} \\\
+    %{!?_without_ass:--enable-libass} \\\
+    %{!?_without_bluray:--enable-libbluray} \\\
     %{?_with_bs2b:--enable-libbs2b} \\\
     %{?_with_caca:--enable-libcaca} \\\
+    %{?_with_cuvid:--enable-cuvid --enable-nonfree} \\\
     %{!?_without_cdio:--enable-libcdio} \\\
     %{?_with_ieee1394:--enable-libdc1394 --enable-libiec61883} \\\
+    --enable-libdrm \\\
     %{?_with_faac:--enable-libfaac --enable-nonfree} \\\
+    %{?_with_fdk_aac:--enable-libfdk-aac --enable-nonfree} \\\
     %{?_with_flite:--enable-libflite} \\\
-    --enable-libjack \\\
+    %{!?_without_jack:--enable-libjack} \\\
     --enable-libfreetype \\\
-    --enable-libfribidi \\\
+    %{!?_without_fribidi:--enable-libfribidi} \\\
     %{?_with_gme:--enable-libgme} \\\
     --enable-libgsm \\\
     %{?_with_ilbc:--enable-libilbc} \\\
+    --disable-liblensfun \\\
+    %{?_with_libnpp:--enable-libnpp --enable-nonfree} \\\
     --enable-libmp3lame \\\
-    --enable-libkvazaar \\\
+    --enable-libmysofa \\\
     %{?_with_netcdf:--enable-netcdf} \\\
-    %{!?_without_nvenc:--enable-nvenc --extra-cflags="-I%{_includedir}/nvenc"} \\\
+    %{?_with_mmal:--enable-mmal} \\\
+    %{!?_without_nvenc:--enable-nvenc} \\\
+    %{?_with_omx:--enable-omx} \\\
+    %{?_with_omx_rpi:--enable-omx-rpi} \\\
     %{!?_without_openal:--enable-openal} \\\
     %{!?_without_opencl:--enable-opencl} \\\
-    %{!?_without_opencv:--enable-libopencv} \\\
-    --enable-libopenh264 \\\
-    --enable-libmysofa \\\
-    --enable-libshine \\\
-    --enable-libzvbi \\\
-    --enable-libvidstab \\\
-    --enable-libaom \\\
-    --enable-libmfx \\\
-    --enable-vapoursynth \\\
+    %{?_with_opencv:--enable-libopencv} \\\
     %{!?_without_opengl:--enable-opengl} \\\
     --enable-libopenjpeg \\\
-    --enable-libopus \\\
+    --enable-libopenmpt \\\
+    %{!?_without_opus:--enable-libopus} \\\
     %{!?_without_pulse:--enable-libpulse} \\\
+    --enable-librsvg \\\
+    %{?_with_rav1e:--enable-librav1e} \\\
     %{?_with_rtmp:--enable-librtmp} \\\
     %{?_with_rubberband:--enable-librubberband} \\\
+    %{?_with_smb:--enable-libsmbclient --enable-version3} \\\
     %{?_with_snappy:--enable-libsnappy} \\\
     --enable-libsoxr \\\
     --enable-libspeex \\\
-    %{?_with_ssh:--enable-libssh} \\\
+    --enable-libsrt \\\
+    --enable-libssh \\\
+    %{?_with_svtav1:--enable-libsvtav1} \\\
     %{?_with_tesseract:--enable-libtesseract} \\\
     --enable-libtheora \\\
     %{?_with_twolame:--enable-libtwolame} \\\
     --enable-libvorbis \\\
     --enable-libv4l2 \\\
+    %{!?_without_vidstab:--enable-libvidstab} \\\
+    %{?_with_vmaf:--enable-libvmaf --enable-version3} \\\
+    %{?_with_vapoursynth:--enable-vapoursynth} \\\
     %{!?_without_vpx:--enable-libvpx} \\\
+    %{!?_without_vulkan:--enable-vulkan --enable-libglslang} \\\
     %{?_with_webp:--enable-libwebp} \\\
     %{!?_without_x264:--enable-libx264} \\\
     %{!?_without_x265:--enable-libx265} \\\
     %{!?_without_xvid:--enable-libxvid} \\\
+    --enable-libxml2 \\\
+    %{!?_without_zimg--enable-libzimg} \\\
     %{?_with_zmq:--enable-libzmq} \\\
-    %{?_with_zvbi:--enable-libzvbi} \\\
+    %{!?_without_zvbi:--enable-libzvbi} \\\
+    %{!?_without_lv2:--enable-lv2} \\\
     --enable-avfilter \\\
+    --enable-libmodplug \\\
     --enable-postproc \\\
     --enable-pthreads \\\
     --disable-static \\\
     --enable-shared \\\
-    --enable-gpl \\\
-    --disable-debug \\\
-    --disable-stripping \\\
+    %{!?_without_gpl:--enable-gpl} \\\
+    --enable-sdl2 \\\
+    --enable-libkvazaar \\\
+    --enable-libcelt \\\
+    --enable-gray \\\
+    --enable-libmfx \\\
+    --enable-libshine \\\
+    --enable-libopenh264 \\\
     --enable-rdft \\\
     --enable-pixelutils \\\
-    --enable-sdl2 \\\
+    --disable-debug \\\
     --enable-swscale \\\
-    --enable-vulkan \\\
-    --enable-rkmpp \\\
+    --enable-rkmpp --enable-version3 \\\
     --enable-libuavs3d \\\
-    --enable-lv2 \\\
-    --enable-libxml2 \\\
-    --enable-libsvtav1 \\\
-    --enable-libglslang
-
-
+    --disable-stripping
     
     
 # --disable-error-resilience \\\ broken in 4.4
@@ -390,46 +419,13 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 
 %{ff_configure}\
     --shlibdir=%{_libdir} \
-    --disable-lto \
-%if 0%{?ffmpegsuffix:1}
-    --build-suffix=%{ffmpegsuffix} \
-    --disable-doc \
-    --disable-ffmpeg --disable-ffplay --disable-ffprobe --disable-ffserver \
-%else
+%ifnarch %{ix86}
+    --enable-lto \
+%endif
 %ifarch %{ix86}
     --cpu=%{_target_cpu} \
 %endif
-%ifarch %{ix86} x86_64 ppc ppc64
     --enable-runtime-cpudetect \
-%endif
-%ifarch ppc
-    --cpu=g3 \
-    --enable-pic \
-%endif
-%ifarch ppc64
-    --cpu=g5 \
-    --enable-pic \
-%endif
-%ifarch %{arm}
-    --disable-runtime-cpudetect --arch=arm \
-%ifarch armv6hl
-    --cpu=armv6 \
-%else
-    --enable-thumb \
-%endif
-%ifarch armv7hl armv7hnl
-    --cpu=armv7-a \
-    --enable-vfpv3 \
-    --enable-thumb \
-%endif
-%ifarch armv7hnl
-    --enable-neon \
-%endif
-%ifarch armv7hl
-    --disable-neon \
-%endif
-%endif
-%endif
 %if %{without davs2}
 --enable-libdavs2 \
 %endif
@@ -446,12 +442,8 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 %if 0%{?fedora} >= 34
 --enable-libvmaf --enable-version3 \
 %endif
-%if 0%{?fedora} >= 31
 --enable-libopenmpt \
-%endif
-%if 0%{?fedora} >= 33
-    --enable-libsmbclient --enable-version3 \
-%endif
+--enable-libsmbclient --enable-version3 
 
 # not yet
 #--enable-librav1e \
@@ -459,16 +451,14 @@ cp -pr doc/examples/{*.c,Makefile,README} _doc/examples/
 #--enable-libglslang \
 #--enable-libvmaf --enable-version3 \
 
-%make_build V=0
-make documentation V=0
-make alltools V=0
+%make_build V=1
+make documentation V=1
+make alltools V=1
 
 %install
-%make_install V=0
+%make_install V=1
 rm -r %{buildroot}%{_datadir}/%{name}/examples
-%if 0%{!?ffmpegsuffix:1}
 install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
-%endif
 
 %post libs -p /sbin/ldconfig
 
@@ -510,6 +500,9 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %{_libdir}/lib*.so
 
 %changelog
+
+* Fri Apr 15 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0.1-7
+- Updated to 5.0.1
 
 * Fri Mar 11 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0-10
 - Enabled AMF support
