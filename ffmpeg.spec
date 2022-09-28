@@ -19,7 +19,7 @@
 %undefine _debugsource_packages
 
 #global _lto_cflags %{nil}
-
+%global _build_id_links none
 
 %if 0%{?fedora} >= 25
 # OpenCV 3.X has an overlinking issue - unsuitable for core libraries
@@ -51,14 +51,14 @@
 
 # Globals for git repository
 # https://git.ffmpeg.org/gitweb/ffmpeg.git
-%global commit0 9687cae2b468e09e35df4cea92cc2e6a0e6c93b3
+%global commit0 1bad30dbe34f2d100b43e8f773d3fe0b5eb23523
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 %global gver .git%{shortcommit0}
 
 
 Summary:        Digital VCR and streaming server
 Name:           ffmpeg
-Version:        5.0.1
+Version:        5.1.1
 Release:        7%{?dist}
 %if 0%{?_with_amr:1}
 License:        GPLv3+
@@ -69,8 +69,8 @@ URL:            http://ffmpeg.org/
 Source0:	https://git.ffmpeg.org/gitweb/ffmpeg.git/snapshot/%{commit0}.tar.gz#/%{name}-%{shortcommit0}.tar.gz
 # forces the buffers to be flushed after a drain has completed. Thanks to jcowgill
 #Patch0:		buffer_flush.patch
-Patch0:		010-ffmpeg-fix-vmaf-model-path.txt
-Patch2:		uavs3d_version.patch
+#Patch0:		010-ffmpeg-fix-vmaf-model-path.txt
+#Patch2:		uavs3d_version.patch
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 BuildRequires:  bzip2-devel
 %{?_with_faac:BuildRequires: faac-devel}
@@ -80,7 +80,9 @@ BuildRequires:  freetype-devel
 %{!?_without_frei0r:BuildRequires: frei0r-devel}
 %{?_with_gme:BuildRequires: game-music-emu-devel}
 BuildRequires:  gnutls-devel
+%if 0%{?fedora} >= 36
 BuildRequires:  annobin-plugin-gcc
+%endif
 BuildRequires:  gsm-devel
 BuildRequires:  lame-devel >= 3.98.3
 BuildRequires:  jack-audio-connection-kit-devel
@@ -139,7 +141,7 @@ BuildRequires:  subversion
 %{?_with_tesseract:BuildRequires: tesseract-devel}
 #BuildRequires:  texi2html
 BuildRequires:  texinfo
-%{!?_without_x264:BuildRequires: x264-devel >= 1:0.161}
+%{!?_without_x264:BuildRequires: x264-devel >= 1:0.164}
 %{!?_without_x265:BuildRequires: x265-devel >= 3.5}
 %{!?_without_xvid:BuildRequires: xvidcore-devel}
 BuildRequires:  zlib-devel
@@ -492,12 +494,18 @@ install -pm755 tools/qt-faststart %{buildroot}%{_bindir}
 %files devel
 %doc MAINTAINERS doc/APIchanges doc/*.txt
 %doc _doc/examples
-%doc %{_docdir}/%{name}/*.html
+%doc %{_docdir}/%{name}/*
 %{_includedir}/%{name}
 %{_libdir}/pkgconfig/lib*.pc
 %{_libdir}/lib*.so
 
 %changelog
+
+* Tue Sep 20 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.1.1-7
+- Updated to 5.1.1
+
+* Fri Jun 17 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0.1-14
+- Rebuilt for x264
 
 * Fri Apr 15 2022 Unitedrpms Project <unitedrpms AT protonmail DOT com> 5.0.1-7
 - Updated to 5.0.1
